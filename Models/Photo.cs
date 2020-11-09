@@ -1,7 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace CfpgFamilyTree.Models {
-    public class Photo {
+namespace CfpgFamilyTree.Models 
+{
+    public class Photo 
+    {
         public int Id { get; set; }
 
         [Required]
