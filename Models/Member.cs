@@ -25,7 +25,7 @@ namespace CfpgFamilyTree.Models
         [MaxLength(2)]
         public int BirthMonth { get; set; }
 
-        [MaxLength(2)]
+        [MaxLength(4)]
         public int BirthYear { get; set; }
 
         [MaxLength(2)]
