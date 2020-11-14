@@ -5,9 +5,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CfpgFamilyTree.Controllers
 {
+    [Route("api/timeline")]
+    [ApiController]
     public class TimelineController : ControllerBase
     {
-        private readonly ITimelineRepo _repository;
+        // private readonly ITimelineRepo _repository;
+        private readonly MockTimelineRepo _repository = new MockTimelineRepo();
+
+        public TimelineController()
+        {
+            // _repository = repository;
+        }
+
+
 
         // GET api/timeline 
         [HttpGet]
@@ -26,5 +36,6 @@ namespace CfpgFamilyTree.Controllers
 
             return Ok(timelineItem);
         }
+
     }
 }
