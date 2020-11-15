@@ -39,7 +39,8 @@ namespace CfpgFamilyTree
 
             services.AddControllers();
 
-            services.AddScoped<ITimelineRepo, MockTimelineRepo>();
+            // services.AddScoped<ITimelineRepo, MockTimelineRepo>();
+            services.AddScoped<ITimelineRepo, SqlTimelineRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

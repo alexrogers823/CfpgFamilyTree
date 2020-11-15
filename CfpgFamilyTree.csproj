@@ -5,6 +5,11 @@
     <UserSecretsId>cc0c8bad-6421-4f85-9d42-854878abf087</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
   </ItemGroup>
 </Project>
