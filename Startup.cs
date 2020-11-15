@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -36,6 +37,9 @@ namespace CfpgFamilyTree
 
             builder.Password = Configuration["DbPassword"];
             _connection = builder.ConnectionString;
+
+            services.AddDbContext<TimelineContext>(opt => opt.UseSqlServer
+                (Configuration.GetConnectionString("TimelineEvents")));
 
             services.AddControllers();
 
