@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using CfpgFamilyTree.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -16,6 +19,7 @@ namespace CfpgFamilyTree
 {
     public class Startup
     {
+        private string _connection = null;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -26,6 +30,13 @@ namespace CfpgFamilyTree
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var builder = new SqlConnectionStringBuilder(
+                Configuration.GetConnectionString("TimelineEvents")
+            );
+
+            builder.Password = Configuration["DbPassword"];
+            _connection = builder.ConnectionString;
+
             services.AddControllers();
 
             services.AddScoped<ITimelineRepo, MockTimelineRepo>();
@@ -38,6 +49,11 @@ namespace CfpgFamilyTree
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync($"DB Connection: {_connection}");
+            });
 
             app.UseHttpsRedirection();
 
