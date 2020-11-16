@@ -1,12 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace CfpgFamilyTree.Models
+namespace CfpgFamilyTree.Dtos
 {
-    public class TimelineEvent
+    public class TimelineEventCreateDto
     {
-        [Key]
-        public int Id { get; set; }
-
         public int? Day { get; set; }
 
         public int? Month { get; set; }

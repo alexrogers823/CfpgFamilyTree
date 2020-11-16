@@ -5,6 +5,11 @@ namespace CfpgFamilyTree.Data
 {
   public class MockTimelineRepo : ITimelineRepo
   {
+    public void CreateTimelineEvent(TimelineEvent timelineEvent)
+    {
+      throw new System.NotImplementedException();
+    }
+
     public IEnumerable<TimelineEvent> GetAllTimelineEvents()
     {
         var timelineEvents = new List<TimelineEvent>
@@ -20,6 +25,11 @@ namespace CfpgFamilyTree.Data
     public TimelineEvent GetTimelineEventById(int id)
     {
         return new TimelineEvent{ Id=0, Day=23, Month=8, Year=1994, Event="I was born"};
+    }
+
+    public bool SaveChanges()
+    {
+      throw new System.NotImplementedException();
     }
   }
 }

@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using AutoMapper;
 using CfpgFamilyTree.Data;
+using CfpgFamilyTree.Dtos;
 using CfpgFamilyTree.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,12 +11,15 @@ namespace CfpgFamilyTree.Controllers
     [ApiController]
     public class TimelineController : ControllerBase
     {
-        // private readonly ITimelineRepo _repository;
-        private readonly MockTimelineRepo _repository = new MockTimelineRepo();
+    private readonly ITimelineRepo _repository;
+    private readonly IMapper _mapper;
 
-        public TimelineController()
+    // private readonly MockTimelineRepo _repository = new MockTimelineRepo();
+
+    public TimelineController(ITimelineRepo repository, IMapper mapper)
         {
-            // _repository = repository;
+            _repository = repository;
+            _mapper = mapper;
         }
 
 
@@ -25,16 +30,30 @@ namespace CfpgFamilyTree.Controllers
         {
             var timelineItems = _repository.GetAllTimelineEvents();
 
-            return Ok(timelineItems);
+            // return Ok(timelineItems);
+            return Ok(_mapper.Map<IEnumerable<TimelineEventReadDto>>(timelineItems));
         }
 
         // GET api/timeline/{id} 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name="GetTimelineEventById")]
         public ActionResult <TimelineEvent> GetTimelineEventById(int id)
         {
             var timelineItem = _repository.GetTimelineEventById(id);
 
             return Ok(timelineItem);
+        }
+
+        // POST api/timeline 
+        [HttpPost]
+        public ActionResult <TimelineEventCreateDto> CreateTimelineEvent(TimelineEventCreateDto timelineEventCreateDto)
+        {
+            var timelineItemModel = _mapper.Map<TimelineEvent>(timelineEventCreateDto);
+            _repository.CreateTimelineEvent(timelineItemModel);
+            _repository.SaveChanges();
+
+            var timelineItemReadDto = _mapper.Map<TimelineEventReadDto>(timelineItemModel);
+
+            return CreatedAtRoute(nameof(GetTimelineEventById), new {Id = timelineItemReadDto.Id}, timelineItemReadDto);
         }
 
     }

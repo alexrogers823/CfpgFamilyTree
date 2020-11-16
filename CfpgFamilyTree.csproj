@@ -5,6 +5,9 @@
     <UserSecretsId>cc0c8bad-6421-4f85-9d42-854878abf087</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="5.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
