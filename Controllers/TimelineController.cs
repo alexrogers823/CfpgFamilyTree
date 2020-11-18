@@ -11,12 +11,12 @@ namespace CfpgFamilyTree.Controllers
     [ApiController]
     public class TimelineController : ControllerBase
     {
-    private readonly ITimelineRepo _repository;
-    private readonly IMapper _mapper;
+        private readonly ITimelineRepo _repository;
+        private readonly IMapper _mapper;
 
-    // private readonly MockTimelineRepo _repository = new MockTimelineRepo();
+        // private readonly MockTimelineRepo _repository = new MockTimelineRepo();
 
-    public TimelineController(ITimelineRepo repository, IMapper mapper)
+        public TimelineController(ITimelineRepo repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
@@ -39,8 +39,11 @@ namespace CfpgFamilyTree.Controllers
         public ActionResult <TimelineEvent> GetTimelineEventById(int id)
         {
             var timelineItem = _repository.GetTimelineEventById(id);
-
-            return Ok(timelineItem);
+            if(timelineItem != null)
+            {
+                return Ok(_mapper.Map<TimelineEventReadDto>(timelineItem));
+            }
+            return NotFound();
         }
 
         // POST api/timeline 
