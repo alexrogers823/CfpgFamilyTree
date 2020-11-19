@@ -42,6 +42,8 @@ namespace CfpgFamilyTree
 
             services.AddDbContext<TimelineContext>(opt => opt.UseSqlServer
                 (Configuration.GetConnectionString("TimelineEvents")));
+            services.AddDbContext<UserContext>(opt => opt.UseSqlServer
+                (Configuration.GetConnectionString("Users")));
 
             services.AddControllers().AddNewtonsoftJson(s => {
                 s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
@@ -51,6 +53,7 @@ namespace CfpgFamilyTree
 
             // services.AddScoped<ITimelineRepo, MockTimelineRepo>();
             services.AddScoped<ITimelineRepo, SqlTimelineRepo>();
+            services.AddScoped<IUserRepo, SqlUserRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
