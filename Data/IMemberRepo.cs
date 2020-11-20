@@ -5,7 +5,10 @@ namespace CfpgFamilyTree.Data
 {
     public interface IMemberRepo
     {
+        bool SaveChanges();
         IEnumerable<Member> GetAllFamilyMembers();
         Member GetFamilyMemberById(int id);
+
+        void CreateMember(Member member);
     }
 }

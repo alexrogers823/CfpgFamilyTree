@@ -18,22 +18,16 @@ namespace CfpgFamilyTree.Dtos
 
         public string ProfilePhotoUrl { get; set; }
 
-        [MaxLength(2)]
         public int BirthDay { get; set; }
 
-        [MaxLength(2)]
         public int BirthMonth { get; set; }
 
-        [MaxLength(4)]
         public int BirthYear { get; set; }
 
-        [MaxLength(2)]
         public int DeathDay { get; set; }
 
-        [MaxLength(2)]
         public int DeathMonth { get; set; }
 
-        [MaxLength(4)]
         public int DeathYear { get; set; }
 
         [Required]

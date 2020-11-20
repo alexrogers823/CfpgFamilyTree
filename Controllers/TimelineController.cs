@@ -30,7 +30,6 @@ namespace CfpgFamilyTree.Controllers
         {
             var timelineItems = _repository.GetAllTimelineEvents();
 
-            // return Ok(timelineItems);
             return Ok(_mapper.Map<IEnumerable<TimelineEventReadDto>>(timelineItems));
         }
 

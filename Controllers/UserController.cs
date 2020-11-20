@@ -28,7 +28,7 @@ namespace CfpgFamilyTree.Controllers
             return Ok(_mapper.Map<IEnumerable<UserReadDto>>(users));
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name="GetUserById")]
         public ActionResult <User> GetUserById(int id)
         {
             var user = _repository.GetUserById(id);
