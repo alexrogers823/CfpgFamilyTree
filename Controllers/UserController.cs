@@ -3,6 +3,7 @@ using AutoMapper;
 using CfpgFamilyTree.Data;
 using CfpgFamilyTree.Dtos;
 using CfpgFamilyTree.Models;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CfpgFamilyTree.Controllers
@@ -49,6 +50,32 @@ namespace CfpgFamilyTree.Controllers
             var userReadDto = _mapper.Map<UserReadDto>(userModel);
             
             return CreatedAtRoute(nameof(GetUserById), new {Id = userReadDto.Id}, userReadDto);
+        }
+
+
+        [HttpPatch("{id}")]
+        public ActionResult UpdateUser(int id, JsonPatchDocument<UserUpdateDto> patchDoc)
+        {
+            var userModel = _repository.GetUserById(id);
+
+            if(userModel == null)
+            {
+                return NotFound();
+            }
+
+            var userPatch = _mapper.Map<UserUpdateDto>(userModel);
+            patchDoc.ApplyTo(userPatch, ModelState);
+            if(!TryValidateModel(userPatch))
+            {
+                return ValidationProblem(ModelState);
+            }
+
+            _mapper.Map(userPatch, userModel);
+
+            _repository.UpdateUser(userModel);
+            _repository.SaveChanges();
+
+            return NoContent();
         }
     }
 }

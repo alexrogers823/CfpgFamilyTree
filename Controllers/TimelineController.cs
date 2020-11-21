@@ -3,6 +3,7 @@ using AutoMapper;
 using CfpgFamilyTree.Data;
 using CfpgFamilyTree.Dtos;
 using CfpgFamilyTree.Models;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CfpgFamilyTree.Controllers
@@ -56,6 +57,32 @@ namespace CfpgFamilyTree.Controllers
             var timelineItemReadDto = _mapper.Map<TimelineEventReadDto>(timelineItemModel);
 
             return CreatedAtRoute(nameof(GetTimelineEventById), new {Id = timelineItemReadDto.Id}, timelineItemReadDto);
+        }
+
+
+        [HttpPatch("{id}")]
+        public ActionResult UpdateTimelineEvent(int id, JsonPatchDocument<TimelineEventUpdateDto> patchDoc)
+        {
+            var timelineEventModel = _repository.GetTimelineEventById(id);
+
+            if(timelineEventModel == null)
+            {
+                return NotFound();
+            }
+
+            var timelineEventPatch = _mapper.Map<TimelineEventUpdateDto>(timelineEventModel);
+            patchDoc.ApplyTo(timelineEventPatch, ModelState);
+            if(!TryValidateModel(timelineEventPatch))
+            {
+                return ValidationProblem(ModelState);
+            }
+
+            _mapper.Map(timelineEventPatch, timelineEventModel);
+
+            _repository.UpdateTimelineEvent(timelineEventModel);
+            _repository.SaveChanges();
+
+            return NoContent();
         }
 
     }
