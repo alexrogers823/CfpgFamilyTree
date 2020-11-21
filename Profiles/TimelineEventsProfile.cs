@@ -11,6 +11,8 @@ namespace CfpgFamilyTree.Profiles
             // Source -> Target 
             CreateMap<TimelineEvent, TimelineEventReadDto>();
             CreateMap<TimelineEventCreateDto, TimelineEvent>();
+            CreateMap<TimelineEventUpdateDto, TimelineEvent>();
+            CreateMap<TimelineEvent, TimelineEventUpdateDto>();
         }
     }
 }

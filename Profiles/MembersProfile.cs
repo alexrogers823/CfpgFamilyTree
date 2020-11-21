@@ -11,6 +11,8 @@ namespace CfpgFamilyTree.Profiles
             // Source -> Target 
             CreateMap<Member, MemberReadDto>();
             CreateMap<MemberCreateDto, Member>();
+            CreateMap<MemberUpdateDto, Member>();
+            CreateMap<Member, MemberCreateDto>();
         }
     }
 }

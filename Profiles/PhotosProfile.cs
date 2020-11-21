@@ -11,6 +11,8 @@ namespace CfpgFamilyTree.Profiles
             // Source -> Target 
             CreateMap<Photo, PhotoReadDto>();
             CreateMap<PhotoCreateDto, Photo>();
+            CreateMap<PhotoUpdateDto, Photo>();
+            CreateMap<Photo, PhotoUpdateDto>();
         }
     }
 }
