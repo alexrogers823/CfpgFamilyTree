@@ -9,5 +9,6 @@ namespace CfpgFamilyTree.Data
         IEnumerable<User> GetAllUsers();
         User GetUserById(int id);
         void CreateUser(User user);
+        void UpdateUser(User user);
     }
 }

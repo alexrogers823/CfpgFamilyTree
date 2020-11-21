@@ -9,5 +9,6 @@ namespace CfpgFamilyTree.Data
         IEnumerable<Photo> GetAllFamilyPhotos();
         Photo GetPhotosByFamilyMember(int id);
         void CreatePhoto(Photo photo);
+        void UpdatePhoto(Photo photo);
     }
 }

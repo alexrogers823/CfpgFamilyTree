@@ -37,5 +37,10 @@ namespace CfpgFamilyTree.Data
         {
             return (_context.SaveChanges() >= 0);
         }
+
+        public void UpdatePhoto(Photo photo)
+        {
+        
+        }
   }
 }

@@ -38,5 +38,10 @@ namespace CfpgFamilyTree.Data
     {
         return (_context.SaveChanges() >= 0);
     }
+
+    public void UpdateTimelineEvent(TimelineEvent timelineEvent)
+    {
+      
+    }
   }
 }

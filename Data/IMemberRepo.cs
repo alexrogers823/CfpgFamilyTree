@@ -10,5 +10,6 @@ namespace CfpgFamilyTree.Data
         Member GetFamilyMemberById(int id);
 
         void CreateMember(Member member);
+        void UpdateMember(Member member);
     }
 }

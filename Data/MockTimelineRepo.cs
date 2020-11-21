@@ -31,5 +31,10 @@ namespace CfpgFamilyTree.Data
     {
       throw new System.NotImplementedException();
     }
+
+    public void UpdateTimelineEvent(TimelineEvent timelineEvent)
+    {
+      throw new System.NotImplementedException();
+    }
   }
 }

@@ -9,5 +9,6 @@ namespace CfpgFamilyTree.Data
         IEnumerable<TimelineEvent> GetAllTimelineEvents();
         TimelineEvent GetTimelineEventById(int id);
         void CreateTimelineEvent(TimelineEvent timelineEvent);
+        void UpdateTimelineEvent(TimelineEvent timelineEvent);
     }
 }
