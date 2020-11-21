@@ -8,7 +8,6 @@ namespace CfpgFamilyTree.Data
         bool SaveChanges();
         IEnumerable<User> GetAllUsers();
         User GetUserById(int id);
-
         void CreateUser(User user);
     }
 }
