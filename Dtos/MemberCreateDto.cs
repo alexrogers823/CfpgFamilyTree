@@ -18,17 +18,17 @@ namespace CfpgFamilyTree.Dtos
 
         public string ProfilePhotoUrl { get; set; }
 
-        public int BirthDay { get; set; }
+        public int? BirthDay { get; set; }
 
-        public int BirthMonth { get; set; }
+        public int? BirthMonth { get; set; }
 
-        public int BirthYear { get; set; }
+        public int? BirthYear { get; set; }
 
-        public int DeathDay { get; set; }
+        public int? DeathDay { get; set; }
 
-        public int DeathMonth { get; set; }
+        public int? DeathMonth { get; set; }
 
-        public int DeathYear { get; set; }
+        public int? DeathYear { get; set; }
 
         [Required]
         public bool IsAlive { get; set; }
@@ -43,6 +43,6 @@ namespace CfpgFamilyTree.Dtos
 
         public string Spouse { get; set; }
 
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
     }
 }
