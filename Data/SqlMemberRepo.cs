@@ -24,7 +24,17 @@ namespace CfpgFamilyTree.Data
             _context.Members.Add(member);
         }
 
-        public IEnumerable<Member> GetAllFamilyMembers()
+        public void DeleteMember(Member member)
+        {
+            if(member == null)
+            {
+                throw new ArgumentNullException(nameof(member));
+            }
+
+            _context.Members.Remove(member);
+        }
+
+    public IEnumerable<Member> GetAllFamilyMembers()
         {
             return _context.Members.ToList();
         }

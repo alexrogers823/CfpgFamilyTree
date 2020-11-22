@@ -76,5 +76,22 @@ namespace CfpgFamilyTree.Controllers
 
             return NoContent();
         }
+
+        [HttpDelete("{id}")]
+        public ActionResult DeletePhoto(int id)
+        {
+            var photoModel = _repository.GetPhotosByFamilyMember(id);
+
+            if(photoModel == null)
+            {
+                return NotFound();
+            }
+
+            _repository.DeletePhoto(photoModel);
+            _repository.SaveChanges();
+
+            return NoContent();
+
+        }
     }
 }

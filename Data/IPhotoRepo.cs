@@ -10,5 +10,6 @@ namespace CfpgFamilyTree.Data
         Photo GetPhotosByFamilyMember(int id);
         void CreatePhoto(Photo photo);
         void UpdatePhoto(Photo photo);
+        void DeletePhoto(Photo photo);
     }
 }

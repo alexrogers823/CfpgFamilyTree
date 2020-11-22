@@ -23,7 +23,17 @@ namespace CfpgFamilyTree.Data
             _context.Photos.Add(photo);
         }
 
-        public IEnumerable<Photo> GetAllFamilyPhotos()
+        public void DeletePhoto(Photo photo)
+        {
+            if(photo == null)
+            {
+                throw new ArgumentNullException(nameof(photo));
+            }
+
+            _context.Photos.Remove(photo);
+        }
+
+    public IEnumerable<Photo> GetAllFamilyPhotos()
         {
             return _context.Photos.ToList();
         }

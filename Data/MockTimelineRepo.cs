@@ -10,6 +10,11 @@ namespace CfpgFamilyTree.Data
       throw new System.NotImplementedException();
     }
 
+    public void DeleteTimelineEvent(TimelineEvent timelineEvent)
+    {
+      throw new System.NotImplementedException();
+    }
+
     public IEnumerable<TimelineEvent> GetAllTimelineEvents()
     {
         var timelineEvents = new List<TimelineEvent>

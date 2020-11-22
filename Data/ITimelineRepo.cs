@@ -10,5 +10,6 @@ namespace CfpgFamilyTree.Data
         TimelineEvent GetTimelineEventById(int id);
         void CreateTimelineEvent(TimelineEvent timelineEvent);
         void UpdateTimelineEvent(TimelineEvent timelineEvent);
+        void DeleteTimelineEvent(TimelineEvent timelineEvent);
     }
 }

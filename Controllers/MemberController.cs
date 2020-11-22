@@ -73,5 +73,22 @@ namespace CfpgFamilyTree.Controllers
 
             return NoContent();
         }
+
+        [HttpDelete("{id}")]
+        public ActionResult DeleteMember(int id)
+        {
+            var memberModel = _repository.GetFamilyMemberById(id);
+
+            if(memberModel == null)
+            {
+                return NotFound();
+            }
+
+            _repository.DeleteMember(memberModel);
+            _repository.SaveChanges();
+
+            return NoContent();
+
+        }
     }
 }

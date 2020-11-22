@@ -24,6 +24,16 @@ namespace CfpgFamilyTree.Data
         _context.TimelineEvents.Add(timelineEvent);
     }
 
+        public void DeleteTimelineEvent(TimelineEvent timelineEvent)
+        {
+            if(timelineEvent == null)
+            {
+                throw new ArgumentNullException(nameof(timelineEvent));
+            }
+
+            _context.TimelineEvents.Remove(timelineEvent);
+        }
+
     public IEnumerable<TimelineEvent> GetAllTimelineEvents()
     {
         return _context.TimelineEvents.ToList();
