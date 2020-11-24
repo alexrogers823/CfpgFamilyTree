@@ -7,9 +7,9 @@ namespace CfpgFamilyTree.Data
 {
     public class SqlPhotoRepo : IPhotoRepo
     {
-        private readonly PhotoContext _context;
+        private readonly CfpgContext _context;
 
-        public SqlPhotoRepo(PhotoContext context)
+        public SqlPhotoRepo(CfpgContext context)
         {
             _context = context;
         }

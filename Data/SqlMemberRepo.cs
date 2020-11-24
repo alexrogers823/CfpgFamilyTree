@@ -7,9 +7,9 @@ namespace CfpgFamilyTree.Data
 {
     public class SqlMemberRepo : IMemberRepo
     {
-        private readonly MemberContext _context;
+        private readonly CfpgContext _context;
 
-        public SqlMemberRepo(MemberContext context)
+        public SqlMemberRepo(CfpgContext context)
         {
             _context = context;
         }

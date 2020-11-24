@@ -7,9 +7,9 @@ namespace CfpgFamilyTree.Data
 {
   public class SqlTimelineRepo : ITimelineRepo
   {
-    private readonly TimelineContext _context;
+    private readonly CfpgContext _context;
 
-    public SqlTimelineRepo(TimelineContext context)
+    public SqlTimelineRepo(CfpgContext context)
     {
         _context = context;
     }
