@@ -46,6 +46,8 @@ namespace CfpgFamilyTree
                 (Configuration.GetConnectionString("Users")));
             services.AddDbContext<MemberContext>(opt => opt.UseSqlServer
                 (Configuration.GetConnectionString("Members")));
+            services.AddDbContext<CfpgContext>(opt => opt.UseSqlServer
+                (Configuration.GetConnectionString("Main")));
 
             services.AddControllers().AddNewtonsoftJson(s => {
                 s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
