@@ -37,6 +37,10 @@ namespace CfpgFamilyTree.Models
         [MaxLength(4)]
         public int DeathYear { get; set; }
 
+        public string Birthplace { get; set; }
+
+        public string Residence { get; set; }
+
         [Required]
         public bool IsAlive { get; set; }
 
