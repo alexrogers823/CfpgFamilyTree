@@ -1,3 +1,5 @@
+using System;
+
 namespace CfpgFamilyTree.Dtos
 {
     public class TimelineEventReadDto
@@ -9,6 +11,10 @@ namespace CfpgFamilyTree.Dtos
         public int Month { get; set; }
 
         public int Year { get; set; }
+
+        public DateTime CreatedOn { get; set; }
+
+        public int CreatedByUserId { get; set; }
 
         public string Event { get; set; }
     }

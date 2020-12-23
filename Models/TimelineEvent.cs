@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace CfpgFamilyTree.Models
@@ -13,6 +14,10 @@ namespace CfpgFamilyTree.Models
 
         [Required]
         public int Year { get; set; }
+
+        public DateTime CreatedOn { get; set; }
+
+        public int CreatedByUserId { get; set; }
 
         [Required]
         public string Event { get; set; }
