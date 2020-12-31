@@ -1,3 +1,5 @@
+using System;
+
 namespace CfpgFamilyTree.Dtos
 {
     public class UserReadDto
@@ -6,5 +8,9 @@ namespace CfpgFamilyTree.Dtos
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
+
+        public DateTime CreatedOn { get; set; }
+
+        public DateTime LastLoggedIn { get; set; }
     }
 }

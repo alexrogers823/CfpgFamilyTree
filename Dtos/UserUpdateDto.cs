@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace CfpgFamilyTree.Dtos
@@ -15,5 +16,7 @@ namespace CfpgFamilyTree.Dtos
 
         [Required]
         public string Password { get; set; }
+
+        public DateTime LastLoggedIn { get; set; }
     }
 }
