@@ -18,6 +18,7 @@ namespace CfpgFamilyTree.Dtos
 
         public string ProfilePhotoUrl { get; set; }
 
+        [Required]
         public int? BirthDay { get; set; }
 
         public int? BirthMonth { get; set; }

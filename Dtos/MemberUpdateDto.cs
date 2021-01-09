@@ -22,6 +22,7 @@ namespace CfpgFamilyTree.Dtos
 
         public int? BirthMonth { get; set; }
 
+        [Required]
         public int? BirthYear { get; set; }
 
         public int? DeathDay { get; set; }
