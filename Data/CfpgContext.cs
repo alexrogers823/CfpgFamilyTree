@@ -14,5 +14,6 @@ namespace CfpgFamilyTree.Data
         public DbSet<Photo> Photos { get; set; }
         public DbSet<TimelineEvent> TimelineEvents { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Artifact> Artifacts { get; set; }
     }
 }
