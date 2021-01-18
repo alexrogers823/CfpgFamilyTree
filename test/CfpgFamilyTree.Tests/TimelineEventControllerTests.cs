@@ -12,22 +12,34 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CfpgFamilyTree.Tests
 {
-    public class TimelineEventControllerTests
+    public class TimelineEventControllerTests : IDisposable
     {
+        Mock<ITimelineRepo> mockRepo;
+        TimelineEventsProfile realProfile;
+        MapperConfiguration configuration;
+        IMapper mapper;
+
+        public TimelineEventControllerTests()
+        {
+            mockRepo = new Mock<ITimelineRepo>();
+            realProfile = new TimelineEventsProfile();
+            configuration = new MapperConfiguration(cfg => cfg.AddProfile(realProfile));
+            mapper = new Mapper(configuration);
+        }
+
+        public void Dispose()
+        {
+            mockRepo = null;
+            realProfile = null;
+            configuration = null;
+            mapper = null;
+        }
 
         [Fact]
         public void GetTimelineEventItems_Returns200OK_WhenDBIsEmpty()
         {
             // Arrange 
-            var mockRepo = new Mock<ITimelineRepo>();
-
-            mockRepo.Setup(repo => repo.GetAllTimelineEvents()).Returns(GetTimelineEvent(0));
-
-            var realProfile = new TimelineEventsProfile();
-
-            var configuration = new MapperConfiguration(cfg => cfg.AddProfile(realProfile));
-
-            IMapper mapper = new Mapper(configuration);
+            mockRepo.Setup(repo => repo.GetAllTimelineEvents()).Returns(GetTimelineEvents(0));
 
             var controller = new TimelineController(mockRepo.Object, mapper);
 
@@ -38,7 +50,47 @@ namespace CfpgFamilyTree.Tests
             Assert.IsType<OkObjectResult>(result.Result);
         }
 
-        private List<TimelineEvent> GetTimelineEvent(int num)
+        [Fact]
+        public void GetTimelineEventItems_ReturnsOneItem_WhenDBHasOneResource()
+        {
+            mockRepo.Setup(repo => repo.GetAllTimelineEvents()).Returns(GetTimelineEvents(1));
+
+            var controller = new TimelineController(mockRepo.Object, mapper);
+
+            var result = controller.GetAllTimelineEvents();
+
+            var okResult = result.Result as OkObjectResult;
+
+            var timelineEvents = okResult.Value as List<TimelineEventReadDto>;
+
+            Assert.Single(timelineEvents);
+        }
+
+        [Fact]
+        public void GetTimelineEventItems_Returns200OK_WhenDBHasOneResource()
+        {
+            mockRepo.Setup(repo => repo.GetAllTimelineEvents()).Returns(GetTimelineEvents(1));
+
+            var controller = new TimelineController(mockRepo.Object, mapper);
+
+            var result = controller.GetAllTimelineEvents();
+
+            Assert.IsType<OkObjectResult>(result.Result);
+        }
+
+        [Fact]
+        public void GetTimelineEventItems_ReturnsCorrectType_WhenDBHasOneResource()
+        {
+            mockRepo.Setup(repo => repo.GetAllTimelineEvents()).Returns(GetTimelineEvents(1));
+
+            var controller = new TimelineController(mockRepo.Object, mapper);
+
+            var result = controller.GetAllTimelineEvents();
+
+            Assert.IsType<ActionResult<IEnumerable<TimelineEventReadDto>>>(result);
+        }
+
+        private List<TimelineEvent> GetTimelineEvents(int num)
         {
             var timelineEvents = new List<TimelineEvent>();
             if (num > 0)
