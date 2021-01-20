@@ -90,6 +90,59 @@ namespace CfpgFamilyTree.Tests
             Assert.IsType<ActionResult<IEnumerable<TimelineEventReadDto>>>(result);
         }
 
+        [Fact]
+        public void GetTimelineEventByID_Returns404NotFound_WhenNonExistentIDProvided()
+        {
+            mockRepo.Setup(repo => repo.GetTimelineEventById(0)).Returns(() => null);
+
+            var controller = new TimelineController(mockRepo.Object, mapper);
+
+            var result = controller.GetTimelineEventById(1);
+
+            Assert.IsType<NotFoundResult>(result.Result);
+        }
+
+        [Fact]
+        public void GetTimelineEventByID_Returns200OK_WhenValidIDProvided()
+        {
+            mockRepo.Setup(repo => 
+                repo.GetTimelineEventById(1)).Returns(new TimelineEvent {
+                    Id = 1,
+                    Day = 4,
+                    Month = 11,
+                    Year = 2020,
+                    CreatedByUserId = 823,
+                    Event = "Agent Orange is Fired"
+                });
+            
+            var controller = new TimelineController(mockRepo.Object, mapper);
+
+            var result = controller.GetTimelineEventById(1);
+
+            Assert.IsType<OkObjectResult>(result.Result);
+        }
+
+        [Fact]
+        public void GetTimelineEventByID_ReturnsCorrectType_WhenValidIDProvided()
+        {
+            mockRepo.Setup(repo => 
+                repo.GetTimelineEventById(1)).Returns(new TimelineEvent {
+                    Id = 1,
+                    Day = 4,
+                    Month = 11,
+                    Year = 2020,
+                    CreatedByUserId = 823,
+                    Event = "Agent Orange is Fired"
+                });
+
+            var controller = new TimelineController(mockRepo.Object, mapper);
+
+            var result = controller.GetTimelineEventById(1);
+
+            Assert.IsType<ActionResult<TimelineEventReadDto>>(result);
+
+        }
+
         private List<TimelineEvent> GetTimelineEvents(int num)
         {
             var timelineEvents = new List<TimelineEvent>();
