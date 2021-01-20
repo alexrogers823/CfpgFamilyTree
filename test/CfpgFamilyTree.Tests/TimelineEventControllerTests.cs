@@ -143,6 +143,48 @@ namespace CfpgFamilyTree.Tests
 
         }
 
+        [Fact]
+        public void CreateTimelineEvent_ReturnsCorrectResourceType_WhenValidObjectSubmitted()
+        {
+            mockRepo.Setup(repo => repo.GetTimelineEventById(1)).Returns(
+                new TimelineEvent {
+                    Id = 1,
+                    Day = 4,
+                    Month = 11,
+                    Year = 2020,
+                    CreatedByUserId = 823,
+                    Event = "Agent Orange is Fired"
+                }
+            );
+
+            var controller = new TimelineController(mockRepo.Object, mapper);
+
+            var result = controller.CreateTimelineEvent(new TimelineEventCreateDto { });
+
+            Assert.IsType<ActionResult<TimelineEventReadDto>>(result);
+        }
+
+        [Fact]
+        public void CreateTimelineEvent_Returns201Created_WhenValidObjectSubmitted()
+        {
+             mockRepo.Setup(repo => repo.GetTimelineEventById(1)).Returns(
+                new TimelineEvent {
+                    Id = 1,
+                    Day = 4,
+                    Month = 11,
+                    Year = 2020,
+                    CreatedByUserId = 823,
+                    Event = "Agent Orange is Fired"
+                }
+            );
+
+            var controller = new TimelineController(mockRepo.Object, mapper);
+
+            var result = controller.CreateTimelineEvent(new TimelineEventCreateDto { });
+
+            Assert.IsType<CreatedAtRouteResult>(result.Result);
+        }
+
         private List<TimelineEvent> GetTimelineEvents(int num)
         {
             var timelineEvents = new List<TimelineEvent>();
