@@ -8,6 +8,7 @@ using CfpgFamilyTree.Profiles;
 using CfpgFamilyTree.Controllers;
 using CfpgFamilyTree.Dtos;
 using Xunit;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CfpgFamilyTree.Tests
@@ -183,6 +184,73 @@ namespace CfpgFamilyTree.Tests
             var result = controller.CreateTimelineEvent(new TimelineEventCreateDto { });
 
             Assert.IsType<CreatedAtRouteResult>(result.Result);
+        }
+
+        // [Fact]
+        // public void UpdateTimelineEvent_Returns204NoContent_WhenValidObjectSubmitted()
+        // {
+        //     mockRepo.Setup(repo => repo.GetTimelineEventById(1)).Returns(
+        //         new TimelineEvent {
+        //             Id = 1,
+        //             Day = 4,
+        //             Month = 11,
+        //             Year = 2020,
+        //             CreatedByUserId = 823,
+        //             Event = "Agent Orange is Fired"
+        //         }
+        //     );
+
+        //     var controller = new TimelineController(mockRepo.Object, mapper);
+
+        //     var result = controller.UpdateTimelineEvent(1, /*new TimelineEventUpdateDto { }*/);
+
+        //     Assert.IsType<NoContentResult>(result);
+        //     // Jennifer Crabb-Kyles, reach out about CEBA documents
+        // }
+
+        // [Fact]
+        // public void UpdateTimelineEvent_Returns404NotFound_WhenNonExistentResourceIDSubmitted()
+        // {
+        //     mockRepo.Setup(repo => repo.GetTimelineEventById(0)).Returns(() => null);
+
+        //     var controller = new TimelineController(mockRepo.Object, mapper);
+
+        //     var result = controller.UpdateTimelineEvent(0, new TimelineEventCreateDto { });
+
+        //     Assert.IsType<NotFoundResult>(result);
+        // }
+
+        [Fact]
+        public void DeleteTimelineEvent_Returns204NoContent_WhenValidResourceIDSubmitted()
+        {
+             mockRepo.Setup(repo => repo.GetTimelineEventById(1)).Returns(
+                new TimelineEvent {
+                    Id = 1,
+                    Day = 4,
+                    Month = 11,
+                    Year = 2020,
+                    CreatedByUserId = 823,
+                    Event = "Agent Orange is Fired"
+                }
+            );
+
+            var controller = new TimelineController(mockRepo.Object, mapper);
+
+            var result = controller.DeleteTimelineEvent(1);
+
+            Assert.IsType<NoContentResult>(result);
+        }
+
+        [Fact]
+        public void DeleteTimelineEvent_Returns404NotFound_WhenNonExistentResourceIDSubmitted()
+        {
+            mockRepo.Setup(repo => repo.GetTimelineEventById(0)).Returns(() => null);
+
+            var controller = new TimelineController(mockRepo.Object, mapper);
+
+            var result = controller.DeleteTimelineEvent(0);
+
+            Assert.IsType<NotFoundResult>(result);
         }
 
         private List<TimelineEvent> GetTimelineEvents(int num)
