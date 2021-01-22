@@ -27,7 +27,7 @@ namespace CfpgFamilyTree.Controllers
 
         // GET api/timeline 
         [HttpGet]
-        public ActionResult <IEnumerable<TimelineEvent>> GetAllTimelineEvents()
+        public ActionResult <IEnumerable<TimelineEventReadDto>> GetAllTimelineEvents()
         {
             var timelineItems = _repository.GetAllTimelineEvents();
 
@@ -36,7 +36,7 @@ namespace CfpgFamilyTree.Controllers
 
         // GET api/timeline/{id} 
         [HttpGet("{id}", Name="GetTimelineEventById")]
-        public ActionResult <TimelineEvent> GetTimelineEventById(int id)
+        public ActionResult <TimelineEventReadDto> GetTimelineEventById(int id)
         {
             var timelineItem = _repository.GetTimelineEventById(id);
             if(timelineItem != null)
@@ -48,7 +48,7 @@ namespace CfpgFamilyTree.Controllers
 
         // POST api/timeline 
         [HttpPost]
-        public ActionResult <TimelineEventCreateDto> CreateTimelineEvent(TimelineEventCreateDto timelineEventCreateDto)
+        public ActionResult <TimelineEventReadDto> CreateTimelineEvent(TimelineEventCreateDto timelineEventCreateDto)
         {
             var timelineItemModel = _mapper.Map<TimelineEvent>(timelineEventCreateDto);
             _repository.CreateTimelineEvent(timelineItemModel);
