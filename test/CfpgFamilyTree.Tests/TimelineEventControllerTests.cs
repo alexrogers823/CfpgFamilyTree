@@ -208,17 +208,17 @@ namespace CfpgFamilyTree.Tests
             // Jennifer Crabb-Kyles, reach out about CEBA documents
         }
 
-        // [Fact]
-        // public void UpdateTimelineEvent_Returns404NotFound_WhenNonExistentResourceIDSubmitted()
-        // {
-        //     mockRepo.Setup(repo => repo.GetTimelineEventById(0)).Returns(() => null);
+        [Fact]
+        public void UpdateTimelineEvent_Returns404NotFound_WhenNonExistentResourceIDSubmitted()
+        {
+            mockRepo.Setup(repo => repo.GetTimelineEventById(0)).Returns(() => null);
 
-        //     var controller = new TimelineController(mockRepo.Object, mapper);
+            var controller = new TimelineController(mockRepo.Object, mapper);
 
-        //     var result = controller.UpdateTimelineEvent(0, new TimelineEventCreateDto { });
+            var result = controller.UpdateTimelineEvent(0, new TimelineEventUpdateDto { });
 
-        //     Assert.IsType<NotFoundResult>(result);
-        // }
+            Assert.IsType<NotFoundResult>(result);
+        }
 
         [Fact]
         public void DeleteTimelineEvent_Returns204NoContent_WhenValidResourceIDSubmitted()
