@@ -9,6 +9,7 @@ namespace CfpgFamilyTree.Dtos
         public int? Month { get; set; }
 
         [Required]
+        [MaxLength(4)]
         public int Year { get; set; }
 
         [Required]

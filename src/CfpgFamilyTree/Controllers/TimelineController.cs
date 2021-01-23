@@ -59,6 +59,23 @@ namespace CfpgFamilyTree.Controllers
             return CreatedAtRoute(nameof(GetTimelineEventById), new {Id = timelineItemReadDto.Id}, timelineItemReadDto);
         }
 
+        // PUT api/timeline/{id} 
+        [HttpPut("{id}")]
+        public ActionResult UpdateTimelineEvent(int id, TimelineEventUpdateDto timelineEventUpdateDto)
+        {
+            var timelineEventModel = _repository.GetTimelineEventById(id);
+            if (timelineEventModel == null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map(timelineEventUpdateDto, timelineEventModel);
+            _repository.UpdateTimelineEvent(timelineEventModel);
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
+
         // PATCH api/timeline/{id}
         [HttpPatch("{id}")]
         public ActionResult UpdateTimelineEvent(int id, JsonPatchDocument<TimelineEventUpdateDto> patchDoc)

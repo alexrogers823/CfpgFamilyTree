@@ -186,27 +186,27 @@ namespace CfpgFamilyTree.Tests
             Assert.IsType<CreatedAtRouteResult>(result.Result);
         }
 
-        // [Fact]
-        // public void UpdateTimelineEvent_Returns204NoContent_WhenValidObjectSubmitted()
-        // {
-        //     mockRepo.Setup(repo => repo.GetTimelineEventById(1)).Returns(
-        //         new TimelineEvent {
-        //             Id = 1,
-        //             Day = 4,
-        //             Month = 11,
-        //             Year = 2020,
-        //             CreatedByUserId = 823,
-        //             Event = "Agent Orange is Fired"
-        //         }
-        //     );
+        [Fact]
+        public void UpdateTimelineEvent_Returns204NoContent_WhenValidObjectSubmitted()
+        {
+            mockRepo.Setup(repo => repo.GetTimelineEventById(1)).Returns(
+                new TimelineEvent {
+                    Id = 1,
+                    Day = 4,
+                    Month = 11,
+                    Year = 2020,
+                    CreatedByUserId = 823,
+                    Event = "Agent Orange is Fired"
+                }
+            );
 
-        //     var controller = new TimelineController(mockRepo.Object, mapper);
+            var controller = new TimelineController(mockRepo.Object, mapper);
 
-        //     var result = controller.UpdateTimelineEvent(1, /*new TimelineEventUpdateDto { }*/);
+            var result = controller.UpdateTimelineEvent(1, new TimelineEventUpdateDto { });
 
-        //     Assert.IsType<NoContentResult>(result);
-        //     // Jennifer Crabb-Kyles, reach out about CEBA documents
-        // }
+            Assert.IsType<NoContentResult>(result);
+            // Jennifer Crabb-Kyles, reach out about CEBA documents
+        }
 
         // [Fact]
         // public void UpdateTimelineEvent_Returns404NotFound_WhenNonExistentResourceIDSubmitted()
