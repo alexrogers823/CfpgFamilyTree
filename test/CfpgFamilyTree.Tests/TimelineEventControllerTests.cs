@@ -221,6 +221,18 @@ namespace CfpgFamilyTree.Tests
         }
 
         [Fact]
+        public void PartialTimelineEventUpdate_Returns404NotFound_WhenNonExistentResourceIDSubmitted()
+        {
+            mockRepo.Setup(repo => repo.GetTimelineEventById(0)).Returns(() => null);
+            
+            var controller = new TimelineController(mockRepo.Object, mapper);
+
+            var result = controller.UpdateTimelineEvent(0, new Microsoft.AspNetCore.JsonPatch.JsonPatchDocument<TimelineEventUpdateDto> { });
+
+            Assert.IsType<NotFoundResult>(result);
+        }
+
+        [Fact]
         public void DeleteTimelineEvent_Returns204NoContent_WhenValidResourceIDSubmitted()
         {
              mockRepo.Setup(repo => repo.GetTimelineEventById(1)).Returns(
