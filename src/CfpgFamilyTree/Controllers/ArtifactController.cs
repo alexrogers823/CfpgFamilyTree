@@ -52,6 +52,22 @@ namespace CfpgFamilyTree.Controllers
             return CreatedAtRoute(nameof(GetArtifactById), new {Id = artifactReadDto.Id}, artifactReadDto);
         }
 
+        [HttpPut("{id}")]
+        public ActionResult UpdateArtifact(int id, ArtifactUpdateDto artifactUpdateDto)
+        {
+            var artifactModel = _repository.GetArtifactById(id);
+            if (artifactModel == null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map(artifactUpdateDto, artifactModel);
+            _repository.UpdateArtifact(artifactModel);
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
+
         [HttpPatch("{id}")]
         public ActionResult UpdateArtifact(int id, JsonPatchDocument<ArtifactUpdateDto> patchDoc)
         {

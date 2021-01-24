@@ -49,6 +49,22 @@ namespace CfpgFamilyTree.Controllers
             return CreatedAtRoute(nameof(GetFamilyMemberById), new {Id = memberReadDto.Id}, memberReadDto);
         }
 
+        [HttpPut("{id}")]
+        public ActionResult UpdateMember(int id, MemberUpdateDto memberUpdateDto)
+        {
+            var memberModel = _repository.GetFamilyMemberById(id);
+            if (memberModel == null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map(memberUpdateDto, memberModel);
+            _repository.UpdateMember(memberModel);
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
+
         [HttpPatch("{id}")]
         public ActionResult UpdateMember(int id, JsonPatchDocument<MemberUpdateDto> patchDoc)
         {

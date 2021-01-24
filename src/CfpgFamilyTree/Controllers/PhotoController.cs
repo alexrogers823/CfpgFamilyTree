@@ -52,6 +52,22 @@ namespace CfpgFamilyTree.Controllers
             return CreatedAtRoute(nameof(GetPhotosByFamilyMember), new {Id = photoReadDto.Id}, photoReadDto);
         }
 
+        [HttpPut("{id}")]
+        public ActionResult UpdatePhoto(int id, PhotoUpdateDto photoUpdateDto)
+        {
+            var photoModel = _repository.GetPhotosByFamilyMember(id);
+            if (photoModel == null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map(photoUpdateDto, photoModel);
+            _repository.UpdatePhoto(photoModel);
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
+
         [HttpPatch("{id}")]
         public ActionResult UpdatePhoto(int id, JsonPatchDocument<PhotoUpdateDto> patchDoc)
         {

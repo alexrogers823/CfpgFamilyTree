@@ -52,6 +52,22 @@ namespace CfpgFamilyTree.Controllers
             return CreatedAtRoute(nameof(GetUserById), new {Id = userReadDto.Id}, userReadDto);
         }
 
+        [HttpPut("{id}")]
+        public ActionResult UpdateUser(int id, UserUpdateDto userUpdateDto)
+        {
+            var userModel = _repository.GetUserById(id);
+            if (userModel == null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map(userUpdateDto, userModel);
+            _repository.UpdateUser(userModel);
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
+
 
         [HttpPatch("{id}")]
         public ActionResult UpdateUser(int id, JsonPatchDocument<UserUpdateDto> patchDoc)
