@@ -22,7 +22,7 @@ namespace CfpgFamilyTree.Controllers
         }
 
         [HttpGet]
-        public ActionResult <IEnumerable<Photo>> GetAllFamilyPhotos()
+        public ActionResult <IEnumerable<PhotoReadDto>> GetAllFamilyPhotos()
         {
             var photos = _repository.GetAllFamilyPhotos();
 
@@ -30,7 +30,7 @@ namespace CfpgFamilyTree.Controllers
         }
 
         [HttpGet("{id}", Name="GetPhotosByFamilyMember")]
-        public ActionResult <Photo> GetPhotosByFamilyMember(int id)
+        public ActionResult <PhotoReadDto> GetPhotosByFamilyMember(int id)
         {
             var photo = _repository.GetPhotosByFamilyMember(id);
             if(photo != null)
@@ -41,7 +41,7 @@ namespace CfpgFamilyTree.Controllers
         }
 
         [HttpPost]
-        public ActionResult <PhotoCreateDto> CreatePhoto(PhotoCreateDto photoCreateDto)
+        public ActionResult <PhotoReadDto> CreatePhoto(PhotoCreateDto photoCreateDto)
         {
             var photoModel = _mapper.Map<Photo>(photoCreateDto);
             _repository.CreatePhoto(photoModel);
