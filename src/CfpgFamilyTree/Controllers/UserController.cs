@@ -22,7 +22,7 @@ namespace CfpgFamilyTree.Controllers
         }
         
         [HttpGet]
-        public ActionResult <IEnumerable<User>> GetAllUsers()
+        public ActionResult <IEnumerable<UserReadDto>> GetAllUsers()
         {
             var users = _repository.GetAllUsers();
 
@@ -30,7 +30,7 @@ namespace CfpgFamilyTree.Controllers
         }
 
         [HttpGet("{id}", Name="GetUserById")]
-        public ActionResult <User> GetUserById(int id)
+        public ActionResult <UserReadDto> GetUserById(int id)
         {
             var user = _repository.GetUserById(id);
             if(user != null)
