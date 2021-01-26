@@ -22,7 +22,7 @@ namespace CfpgFamilyTree.Controllers
         }
 
         [HttpGet]
-        public ActionResult <IEnumerable<Member>> GetAllFamilyMembers()
+        public ActionResult <IEnumerable<MemberReadDto>> GetAllFamilyMembers()
         {
             var members = _repository.GetAllFamilyMembers();
 
@@ -30,15 +30,18 @@ namespace CfpgFamilyTree.Controllers
         }
 
         [HttpGet("{id}", Name="GetFamilyMemberById")]
-        public ActionResult <Member> GetFamilyMemberById(int id)
+        public ActionResult <MemberReadDto> GetFamilyMemberById(int id)
         {
             var member = _repository.GetFamilyMemberById(id);
-
-            return Ok(_mapper.Map<MemberReadDto>(member));
+            if (member != null)
+            {
+                return Ok(_mapper.Map<MemberReadDto>(member));
+            }
+            return NotFound();
         }
 
         [HttpPost]
-        public ActionResult <MemberCreateDto> CreateMember(MemberCreateDto memberCreateDto)
+        public ActionResult <MemberReadDto> CreateMember(MemberCreateDto memberCreateDto)
         {
             var memberModel = _mapper.Map<Member>(memberCreateDto);
             _repository.CreateMember(memberModel);

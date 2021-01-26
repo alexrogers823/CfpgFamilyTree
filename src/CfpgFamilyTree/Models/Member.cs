@@ -47,14 +47,14 @@ namespace CfpgFamilyTree.Models
 
         public bool HasSpouse { get; set; }
 
-        public int PrimaryParentId { get; set; }
+        public int? PrimaryParentId { get; set; }
 
-        public int SecondaryParentId { get; set; }
+        public int? SecondaryParentId { get; set; }
 
         public bool IsActiveUser { get; set; }
 
-        public int SpouseId { get; set; }
+        public int? SpouseId { get; set; }
 
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
     }
 }
