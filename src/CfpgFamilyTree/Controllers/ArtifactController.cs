@@ -22,7 +22,7 @@ namespace CfpgFamilyTree.Controllers
         }
 
         [HttpGet]
-        public ActionResult <IEnumerable<Artifact>> GetAllArtifacts()
+        public ActionResult <IEnumerable<ArtifactReadDto>> GetAllArtifacts()
         {
             var artifacts = _repository.GetAllArtifacts();
 
@@ -30,7 +30,7 @@ namespace CfpgFamilyTree.Controllers
         }
 
         [HttpGet("{id}", Name="GetArtifactById")]
-        public ActionResult <Artifact> GetArtifactById(int id)
+        public ActionResult <ArtifactReadDto> GetArtifactById(int id)
         {
             var artifact = _repository.GetArtifactById(id);
             if (artifact != null)
@@ -41,13 +41,13 @@ namespace CfpgFamilyTree.Controllers
         }
 
         [HttpPost]
-        public ActionResult <ArtifactCreateDto> CreateArtifact(ArtifactCreateDto artifactCreateDto)
+        public ActionResult <ArtifactReadDto> CreateArtifact(ArtifactCreateDto artifactCreateDto)
         {
             var artifactModel = _mapper.Map<Artifact>(artifactCreateDto);
             _repository.CreateArtifact(artifactModel);
             _repository.SaveChanges();
 
-            var artifactReadDto = _mapper.Map<ArtifactCreateDto>(artifactModel);
+            var artifactReadDto = _mapper.Map<ArtifactReadDto>(artifactModel);
 
             return CreatedAtRoute(nameof(GetArtifactById), new {Id = artifactReadDto.Id}, artifactReadDto);
         }
