@@ -23,12 +23,11 @@ namespace CfpgFamilyTree
     public class Startup
     {
         private string _connection = null;
+        public IConfiguration Configuration { get; }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -40,13 +39,13 @@ namespace CfpgFamilyTree
             // builder.Password = Configuration["DbPassword"];
             // _connection = builder.ConnectionString;
 
-            services.AddDbContext<TimelineContext>(opt => opt.UseSqlServer
+            services.AddDbContext<TimelineContext>(opt => opt.UseNpgsql
                 (Configuration.GetConnectionString("TimelineEvents")));
-            services.AddDbContext<UserContext>(opt => opt.UseSqlServer
+            services.AddDbContext<UserContext>(opt => opt.UseNpgsql
                 (Configuration.GetConnectionString("Users")));
-            services.AddDbContext<MemberContext>(opt => opt.UseSqlServer
+            services.AddDbContext<MemberContext>(opt => opt.UseNpgsql
                 (Configuration.GetConnectionString("Members")));
-            services.AddDbContext<CfpgContext>(opt => opt.UseSqlServer
+            services.AddDbContext<CfpgContext>(opt => opt.UseNpgsql
                 (Configuration.GetConnectionString("Master")));
 
             services.AddControllers().AddNewtonsoftJson(s => {
