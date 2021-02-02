@@ -1,5 +1,7 @@
 # CFPG Family Tree
 
+![GitHub last commit](https://img.shields.io/github/last-commit/alexrogers823/CfpgFamilyTree)
+
 This is a full-stack application about preserving and updating a family tree. Users of the app can see our family lineage, view biographies of each family member in the tree, see a timeline of important family events, and even view historic documents that are unique to our family history.
 
 ### _Technologies Used_
