@@ -4,6 +4,7 @@ namespace CfpgFamilyTree.Models
 {
     public class Member 
     {
+        [Key]
         public int Id { get; set; }
 
         [Required]
@@ -19,23 +20,22 @@ namespace CfpgFamilyTree.Models
 
         public string ProfilePhotoUrl { get; set; }
 
-        [MaxLength(2)]
+        // TODO: Write Validation method to account for February 
+        [Range(1, 31, ErrorMessage="Value for {0} must be between {1} and {2}")]
         public int BirthDay { get; set; }
 
-        [MaxLength(2)]
+        [Range(1, 12, ErrorMessage="Value for {0} must be between {1} and {2}")]
         public int BirthMonth { get; set; }
 
-        [MaxLength(4)]
         [Required]
         public int BirthYear { get; set; }
 
-        [MaxLength(2)]
+        [Range(1, 31, ErrorMessage="Value for {0} must be between {1} and {2}")]
         public int DeathDay { get; set; }
 
-        [MaxLength(2)]
+        [Range(1, 12, ErrorMessage="Value for {0} must be between {1} and {2}")]
         public int DeathMonth { get; set; }
 
-        [MaxLength(4)]
         public int DeathYear { get; set; }
 
         public string Birthplace { get; set; }

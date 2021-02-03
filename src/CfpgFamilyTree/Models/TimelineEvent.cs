@@ -13,7 +13,6 @@ namespace CfpgFamilyTree.Models
         public int? Month { get; set; }
 
         [Required]
-        [MaxLength(4)]
         public int Year { get; set; }
 
         public DateTime CreatedOn { get; set; }

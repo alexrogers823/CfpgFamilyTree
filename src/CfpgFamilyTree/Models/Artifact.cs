@@ -4,6 +4,7 @@ namespace CfpgFamilyTree.Models
 {
     public class Artifact
     {
+        [Key]
         public int Id { get; set; }
 
         [Required]
