@@ -39,12 +39,6 @@ namespace CfpgFamilyTree
             // builder.Password = Configuration["DbPassword"];
             // _connection = builder.ConnectionString;
 
-            services.AddDbContext<TimelineContext>(opt => opt.UseNpgsql
-                (Configuration.GetConnectionString("TimelineEvents")));
-            services.AddDbContext<UserContext>(opt => opt.UseNpgsql
-                (Configuration.GetConnectionString("Users")));
-            services.AddDbContext<MemberContext>(opt => opt.UseNpgsql
-                (Configuration.GetConnectionString("Members")));
             services.AddDbContext<CfpgContext>(opt => opt.UseNpgsql
                 (Configuration.GetConnectionString("Master")));
 
