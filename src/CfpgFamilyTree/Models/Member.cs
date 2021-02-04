@@ -31,12 +31,12 @@ namespace CfpgFamilyTree.Models
         public int BirthYear { get; set; }
 
         [Range(1, 31, ErrorMessage="Value for {0} must be between {1} and {2}")]
-        public int DeathDay { get; set; }
+        public int? DeathDay { get; set; }
 
         [Range(1, 12, ErrorMessage="Value for {0} must be between {1} and {2}")]
-        public int DeathMonth { get; set; }
+        public int? DeathMonth { get; set; }
 
-        public int DeathYear { get; set; }
+        public int? DeathYear { get; set; }
 
         public string Birthplace { get; set; }
 
