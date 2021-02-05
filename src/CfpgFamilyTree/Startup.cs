@@ -17,6 +17,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
+using Npgsql;
 
 namespace CfpgFamilyTree
 {
@@ -32,15 +33,12 @@ namespace CfpgFamilyTree
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // var builder = new SqlConnectionStringBuilder(
-            //     Configuration.GetConnectionString("TimelineEvents")
-            // );
+            var builder = new NpgsqlConnectionStringBuilder();
+            builder.ConnectionString = Configuration.GetConnectionString("Master");
+            builder.Username = Configuration["UserID"];
+            builder.Password = Configuration["Password"];
 
-            // builder.Password = Configuration["DbPassword"];
-            // _connection = builder.ConnectionString;
-
-            services.AddDbContext<CfpgContext>(opt => opt.UseNpgsql
-                (Configuration.GetConnectionString("Master")));
+            services.AddDbContext<CfpgContext>(opt => opt.UseNpgsql(builder.ConnectionString));
 
             services.AddControllers().AddNewtonsoftJson(s => {
                 s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();

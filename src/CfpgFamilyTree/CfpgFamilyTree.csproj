@@ -2,8 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <!-- <UserSecretsId></UserSecretsId> -->
-    <UserSecretsId>cc0c8bad-6421-4f85-9d42-854878abf087</UserSecretsId>
+    <UserSecretsId>502245c0-ed9c-4f18-a368-13a53b067cad</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
