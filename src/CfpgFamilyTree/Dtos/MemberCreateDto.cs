@@ -31,6 +31,24 @@ namespace CfpgFamilyTree.Dtos
 
         public int? DeathYear { get; set; }
 
+        public string Birthplace { get; set; }
+
+        public string Residence { get; set; }
+
+        public string BioParagraph1 { get; set; }
+
+        public string BioParagraph2 { get; set; }
+
+        public string BioParagraph3 { get; set; }
+
+        public string BioParagraph4 { get; set; }
+
+        public string BioParagraph5 { get; set; }
+
+        public string BioParagraph6 { get; set; }
+        
+        public string BioParagraph7 { get; set; }
+
         [Required]
         public bool IsAlive { get; set; }
 
