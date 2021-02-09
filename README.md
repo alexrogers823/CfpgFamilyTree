@@ -31,7 +31,7 @@ Tech Requirements:
     - SSH: `git clone git@github.com:alexrogers823/CfpgFamilyTree.git`
     - HTTPS:  `git clone https://github.com/alexrogers823/CfpgFamilyTree.git`
     - [Download ZIP](https://github.com/alexrogers823/CfpgFamilyTree/archive/master.zip)
-2. Change directories into the frontend folder and install React packages 
+<!-- 2. Change directories into the frontend folder and install React packages 
     > `cd frontend && npm install`
 3. Change directories into the backend folder and build .NET application
-    > `cd ../backend && dotnet build`
+    > `cd ../backend && dotnet build` -->
