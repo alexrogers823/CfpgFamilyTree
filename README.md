@@ -22,6 +22,7 @@ The project aims to acheive the following:
 ### _Getting Started_
 Tech Requirements:
 - [PostgreSQL](https://postgresapp.com/downloads.html)
+- [Docker](https://www.docker.com/products/docker-desktop)
 - [.NET Core](https://dotnet.microsoft.com/download/dotnet-core)
 - [Node.js](https://nodejs.org/en/download/)
 - React.js
@@ -31,7 +32,7 @@ Tech Requirements:
     - SSH: `git clone git@github.com:alexrogers823/CfpgFamilyTree.git`
     - HTTPS:  `git clone https://github.com/alexrogers823/CfpgFamilyTree.git`
     - [Download ZIP](https://github.com/alexrogers823/CfpgFamilyTree/archive/master.zip)
-<!-- 2. Change directories into the frontend folder and install React packages 
-    > `cd frontend && npm install`
-3. Change directories into the backend folder and build .NET application
-    > `cd ../backend && dotnet build` -->
+2. Have a docker container running (Postgres connection is using a container)
+3. Make sure that dotnet 3.1 is installed by running `dotnet build`
+4. Change directories into `/src/CfpgFamilyTree` and verify that it works with `dotnet run`
+5. (Optional) Change directories into `/test/CfpgFamilyTree.Tests` and run all tests with `dotnet test`
