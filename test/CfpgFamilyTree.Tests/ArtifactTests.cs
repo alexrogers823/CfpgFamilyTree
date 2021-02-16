@@ -13,7 +13,7 @@ namespace CfpgFamilyTree.Tests
             testArtifact = new Artifact
             {
                 PhotoUrl = "www.familyHistory.com/123",
-                Description = "Marriage License 1"
+                Title = "Marriage License 1"
             };
         }
 
@@ -31,11 +31,11 @@ namespace CfpgFamilyTree.Tests
         }
 
         [Fact]
-        public void CanChangeDescription()
+        public void CanChangeTitle()
         {
-            testArtifact.Description = "Deed to Rogers house";
+            testArtifact.Title = "Deed to Rogers house";
 
-            Assert.Equal("Deed to Rogers house", testArtifact.Description);
+            Assert.Equal("Deed to Rogers house", testArtifact.Title);
         }
     }
 }

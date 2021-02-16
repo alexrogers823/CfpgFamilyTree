@@ -107,7 +107,7 @@ namespace CfpgFamilyTree.Tests
             {
                 Id = 1,
                 PhotoUrl = "www.heartofthecards.com/millenium-puzzle",
-                Description = "Yugi solves the Millenium Puzzle"
+                Title = "Yugi solves the Millenium Puzzle"
             });
 
             var controller = new ArtifactController(mockRepo.Object, mapper);
@@ -124,7 +124,7 @@ namespace CfpgFamilyTree.Tests
             {
                 Id = 1,
                 PhotoUrl = "www.heartofthecards.com/millenium-puzzle",
-                Description = "Yugi solves the Millenium Puzzle"
+                Title = "Yugi solves the Millenium Puzzle"
             });
 
             var controller = new ArtifactController(mockRepo.Object, mapper);
@@ -141,7 +141,7 @@ namespace CfpgFamilyTree.Tests
             {
                 Id = 1,
                 PhotoUrl = "www.heartofthecards.com/millenium-puzzle",
-                Description = "Yugi solves the Millenium Puzzle"
+                Title = "Yugi solves the Millenium Puzzle"
             });
 
             var controller = new ArtifactController(mockRepo.Object, mapper);
@@ -158,7 +158,7 @@ namespace CfpgFamilyTree.Tests
             {
                 Id = 1,
                 PhotoUrl = "www.heartofthecards.com/millenium-puzzle",
-                Description = "Yugi solves the Millenium Puzzle"
+                Title = "Yugi solves the Millenium Puzzle"
             });
 
             var controller = new ArtifactController(mockRepo.Object, mapper);
@@ -175,7 +175,7 @@ namespace CfpgFamilyTree.Tests
             {
                 Id = 1,
                 PhotoUrl = "www.heartofthecards.com/millenium-puzzle",
-                Description = "Yugi solves the Millenium Puzzle"
+                Title = "Yugi solves the Millenium Puzzle"
             });
 
             var controller = new ArtifactController(mockRepo.Object, mapper);
@@ -216,7 +216,7 @@ namespace CfpgFamilyTree.Tests
             {
                 Id = 1,
                 PhotoUrl = "www.heartofthecards.com/millenium-puzzle",
-                Description = "Yugi solves the Millenium Puzzle"
+                Title = "Yugi solves the Millenium Puzzle"
             });
 
             var controller = new ArtifactController(mockRepo.Object, mapper);
@@ -247,7 +247,7 @@ namespace CfpgFamilyTree.Tests
                 {
                     Id = 0,
                     PhotoUrl = "www.heartofthecards.com/millenium-puzzle",
-                    Description = "Yugi solves the Millenium Puzzle"
+                    Title = "Yugi solves the Millenium Puzzle"
                 });
             }
 
