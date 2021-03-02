@@ -23,8 +23,6 @@ namespace CfpgFamilyTree.Controllers
             _mapper = mapper;
         }
 
-
-
         // GET api/timeline 
         [HttpGet]
         public ActionResult <IEnumerable<TimelineEventReadDto>> GetAllTimelineEvents()
