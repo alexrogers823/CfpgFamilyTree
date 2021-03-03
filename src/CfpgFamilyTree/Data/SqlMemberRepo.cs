@@ -34,7 +34,7 @@ namespace CfpgFamilyTree.Data
             _context.Members.Remove(member);
         }
 
-    public IEnumerable<Member> GetAllFamilyMembers()
+        public IEnumerable<Member> GetAllFamilyMembers()
         {
             return _context.Members.ToList();
         }
