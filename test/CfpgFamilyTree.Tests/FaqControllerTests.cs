@@ -6,6 +6,7 @@ using CfpgFamilyTree.Data;
 using CfpgFamilyTree.Dtos;
 using CfpgFamilyTree.Models;
 using CfpgFamilyTree.Profiles;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;
@@ -86,6 +87,139 @@ namespace CfpgFamilyTree.Tests
 
             Assert.IsType<ActionResult<IEnumerable<FaqReadDto>>>(result);
         }
+
+        [Fact]
+        public void GetQuestionByID_Returns404NotFound_WhenIDDoesNotExist()
+        {
+            mockRepo.Setup(repo => repo.GetQuestionById(0)).Returns(() => null);
+
+            var controller = new FaqController(mockRepo.Object, mapper);
+
+            var result = controller.GetQuestionById(1);
+
+            Assert.IsType<NotFoundResult>(result.Result);
+        }
+
+        [Fact]
+        public void GetQuestionByID_Returns200OK_WhenIDExists()
+        {
+            mockRepo.Setup(repo => repo.GetQuestionById(1)).Returns(new Faq {
+                Id = 1,
+                Question = "Who is White Canary?",
+                Answer = "Sara Lance"
+            });
+
+            var controller = new FaqController(mockRepo.Object, mapper);
+
+            var result = controller.GetQuestionById(1);
+
+            Assert.IsType<OkObjectResult>(result.Result);
+        }
+
+        [Fact]
+        public void GetQuestionByID_ReturnsCorrectType_WhenIDExists()
+        {
+            mockRepo.Setup(repo => repo.GetQuestionById(1)).Returns(new Faq {
+                Id = 1,
+                Question = "Who is White Canary?",
+                Answer = "Sara Lance"
+            });
+
+            var controller = new FaqController(mockRepo.Object, mapper);
+
+            var result = controller.GetQuestionById(1);
+
+            Assert.IsType<ActionResult<FaqReadDto>>(result);
+        }
+
+        [Fact]
+        public void CreateQuestion_ReturnsCorrectType_WhenIDExists()
+        {
+            mockRepo.Setup(repo => repo.GetQuestionById(1)).Returns(new Faq {
+                Id = 1,
+                Question = "Who is White Canary?",
+                Answer = "Sara Lance"
+            });
+
+            var controller = new FaqController(mockRepo.Object, mapper);
+
+            var result = controller.CreateQuestion(new FaqCreateDto { });
+
+            Assert.IsType<ActionResult<FaqReadDto>>(result);
+        }
+
+        [Fact]
+        public void CreateQuestion_Returns201Created_WhenValidObjectSubmitted()
+        {
+            mockRepo.Setup(repo => repo.GetQuestionById(1)).Returns(new Faq {
+                Id = 1,
+                Question = "Who is White Canary?",
+                Answer = "Sara Lance"
+            });
+
+            var controller = new FaqController(mockRepo.Object, mapper);
+
+            var result = controller.CreateQuestion(new FaqCreateDto { });
+
+            Assert.IsType<CreatedAtRouteResult>(result.Result);
+        }
+
+        [Fact]
+        public void UpdateQuestion_Returns204NoContent_WhenValidObjectSubmitted()
+        {
+            mockRepo.Setup(repo => repo.GetQuestionById(1)).Returns(new Faq {
+                Id = 1,
+                Question = "Who is White Canary?",
+                Answer = "Sara Lance"
+            });
+
+            var controller = new FaqController(mockRepo.Object, mapper);
+            
+            var result = controller.UpdateQuestion(1, new JsonPatchDocument<FaqUpdateDto> { });
+
+            Assert.IsType<NoContentResult>(result);
+        }
+
+        [Fact]
+        public void UpdateQuestion_Returns404NotFound_WhenIDDoesNotExist()
+        {
+            mockRepo.Setup(repo => repo.GetQuestionById(0)).Returns(() => null);
+
+            var controller = new FaqController(mockRepo.Object, mapper);
+
+            var result = controller.UpdateQuestion(0, new JsonPatchDocument<FaqUpdateDto> { });
+
+            Assert.IsType<NotFoundResult>(result);
+        }
+
+        [Fact]
+        public void DeleteQuestion_Returns204NoContent_WhenIDExists()
+        {
+            mockRepo.Setup(repo => repo.GetQuestionById(1)).Returns(new Faq {
+                Id = 1,
+                Question = "Who is White Canary?",
+                Answer = "Sara Lance"
+            });
+
+            var controller = new FaqController(mockRepo.Object, mapper);
+
+            var result = controller.DeleteQuestion(1);
+
+            Assert.IsType<NoContentResult>(result);
+        }
+
+        [Fact]
+        public void DeleteQuestion_Returns404NotFound_WhenIDDoesNotExist()
+        {
+            mockRepo.Setup(repo => repo.GetQuestionById(0)).Returns(() => null);
+
+            var controller = new FaqController(mockRepo.Object, mapper);
+
+            var result = controller.DeleteQuestion(1);
+
+            Assert.IsType<NotFoundResult>(result);
+        }
+
 
         private List<Faq> GetQuestions(int num)
         {
