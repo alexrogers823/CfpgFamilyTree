@@ -52,6 +52,7 @@ namespace CfpgFamilyTree
             services.AddScoped<IMemberRepo, SqlMemberRepo>();
             services.AddScoped<IPhotoRepo, SqlPhotoRepo>();
             services.AddScoped<IArtifactRepo, SqlArtifactRepo>();
+            services.AddScoped<IFaqRepo, SqlFaqRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
