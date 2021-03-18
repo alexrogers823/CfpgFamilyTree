@@ -41,7 +41,7 @@ namespace CfpgFamilyTree.Data
 
         public Member GetFamilyMemberById(int id)
         {
-            return _context.Members.FirstOrDefault(p => p.Id == id);
+            return _context.Members.FirstOrDefault(p => p.Id.Equals(id));
         }
 
         public bool SaveChanges()

@@ -1,11 +1,12 @@
 using System.ComponentModel.DataAnnotations;
+using System.Xml;
 
 namespace CfpgFamilyTree.Models 
 {
     public class Member 
     {
         [Key]
-        public int Id { get; set; }
+        public UniqueId Id { get; set; }
 
         [Required]
         public string FirstName { get; set; }

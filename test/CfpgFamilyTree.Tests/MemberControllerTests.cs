@@ -105,7 +105,6 @@ namespace CfpgFamilyTree.Tests
         {
             mockRepo.Setup(repo =>
                 repo.GetFamilyMemberById(1)).Returns(new Member {
-                    Id = 1,
                     FirstName = "Jesus",
                     MiddleName = null,
                     LastName = "Christ",
@@ -141,7 +140,6 @@ namespace CfpgFamilyTree.Tests
         {
             mockRepo.Setup(repo =>
                 repo.GetFamilyMemberById(1)).Returns(new Member {
-                    Id = 1,
                     FirstName = "Jesus",
                     MiddleName = null,
                     LastName = "Christ",
@@ -177,7 +175,6 @@ namespace CfpgFamilyTree.Tests
         {
             mockRepo.Setup(repo =>
                 repo.GetFamilyMemberById(1)).Returns(new Member {
-                    Id = 1,
                     FirstName = "Jesus",
                     MiddleName = null,
                     LastName = "Christ",
@@ -213,7 +210,6 @@ namespace CfpgFamilyTree.Tests
         {
             mockRepo.Setup(repo =>
                 repo.GetFamilyMemberById(1)).Returns(new Member {
-                    Id = 1,
                     FirstName = "Jesus",
                     MiddleName = null,
                     LastName = "Christ",
@@ -249,7 +245,6 @@ namespace CfpgFamilyTree.Tests
         {
             mockRepo.Setup(repo =>
                 repo.GetFamilyMemberById(1)).Returns(new Member {
-                    Id = 1,
                     FirstName = "Jesus",
                     MiddleName = null,
                     LastName = "Christ",
@@ -309,7 +304,6 @@ namespace CfpgFamilyTree.Tests
         {
             mockRepo.Setup(repo =>
                 repo.GetFamilyMemberById(1)).Returns(new Member {
-                    Id = 1,
                     FirstName = "Jesus",
                     MiddleName = null,
                     LastName = "Christ",
@@ -359,7 +353,6 @@ namespace CfpgFamilyTree.Tests
             {
                 members.Add(new Member
                 {
-                    Id = 0,
                     FirstName = "Jesus",
                     MiddleName = null,
                     LastName = "Christ",

@@ -1,8 +1,10 @@
+using System.Xml;
+
 namespace CfpgFamilyTree.Dtos
 {
     public class MemberReadDto
     {
-        public int Id { get; set; }
+        public UniqueId Id { get; set; }
 
         public string FirstName { get; set; }
 
