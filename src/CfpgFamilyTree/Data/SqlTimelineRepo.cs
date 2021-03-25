@@ -36,7 +36,8 @@ namespace CfpgFamilyTree.Data
 
     public IEnumerable<TimelineEvent> GetAllTimelineEvents()
     {
-        return _context.TimelineEvents.ToList();
+        return _context.TimelineEvents.OrderBy(e => e.Year).ThenBy(e => e.Month).ThenBy(e => e.Day).ToList();
+        // return _context.TimelineEvents.ToList();
     }
 
     public TimelineEvent GetTimelineEventById(int id)
