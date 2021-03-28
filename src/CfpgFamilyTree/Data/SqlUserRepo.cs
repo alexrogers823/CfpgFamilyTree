@@ -23,6 +23,7 @@ namespace CfpgFamilyTree.Data
                 throw new ArgumentNullException(nameof(user));
             }
 
+            user.Password = _hashPassword(user.Password); // This might work
             _context.Users.Add(user);
         }
 
