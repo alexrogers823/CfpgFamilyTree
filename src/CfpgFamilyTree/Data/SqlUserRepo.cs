@@ -10,10 +10,12 @@ namespace CfpgFamilyTree.Data
     public class SqlUserRepo : IUserRepo
     {
         private readonly CfpgContext _context;
+        private byte[] salt;
 
         public SqlUserRepo(CfpgContext context)
         {
             _context = context;
+            salt = new byte[128 / 8];
         }
 
         public void CreateUser(User user)
@@ -59,7 +61,6 @@ namespace CfpgFamilyTree.Data
 
         private string _hashPassword(string password)
         {
-            byte[] salt = new byte[128 / 8];
             new RNGCryptoServiceProvider().GetBytes(salt);
 
             string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
@@ -75,7 +76,21 @@ namespace CfpgFamilyTree.Data
 
         private bool _authenticateUser(User user)
         {
-            throw new NotImplementedException();
+            string inputPassword = user.Password;
+            new RNGCryptoServiceProvider().GetBytes(salt);
+
+            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                password: inputPassword,
+                salt: salt,
+                prf: KeyDerivationPrf.HMACSHA1,
+                iterationCount: 10000,
+                numBytesRequested: 256 / 8
+            ));
+
+            string dbHashed = "fill in here";
+
+            return hashed == dbHashed;
+            // TODO: retrieve actual hashed password, and find user in database using LINQ
         }
   } 
 }
