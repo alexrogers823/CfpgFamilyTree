@@ -87,9 +87,9 @@ namespace CfpgFamilyTree.Data
                 numBytesRequested: 256 / 8
             ));
 
-            string dbHashed = "fill in here";
+            User dbUser = _context.Users.FirstOrDefault(p => p.Email == user.Email);
 
-            return hashed == dbHashed;
+            return hashed == dbUser.Password;
             // TODO: retrieve actual hashed password, and find user in database using LINQ
         }
   } 
