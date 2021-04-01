@@ -49,6 +49,21 @@ namespace CfpgFamilyTree.Data
             return _context.Users.FirstOrDefault(p => p.Id == id);
         }
 
+        public User LoginUser(User user)
+        {
+            if(user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+
+            if(_authenticateUser(user))
+            {
+                return user;
+            } else {
+                throw new MemberAccessException(nameof(user));
+            }
+        }
+
         public bool SaveChanges()
         {
             return (_context.SaveChanges() >= 0);
@@ -90,7 +105,7 @@ namespace CfpgFamilyTree.Data
             User dbUser = _context.Users.FirstOrDefault(p => p.Email == user.Email);
 
             return hashed == dbUser.Password;
-            // TODO: retrieve actual hashed password, and find user in database using LINQ
         }
-  } 
+
+    } 
 }
