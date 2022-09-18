@@ -45,6 +45,26 @@ namespace CfpgFamilyTree.Migrations
                     b.ToTable("Artifacts");
                 });
 
+            modelBuilder.Entity("CfpgFamilyTree.Models.Faq", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .UseIdentityByDefaultColumn();
+
+                    b.Property<string>("Answer")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Question")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Questions");
+                });
+
             modelBuilder.Entity("CfpgFamilyTree.Models.Member", b =>
                 {
                     b.Property<int>("Id")

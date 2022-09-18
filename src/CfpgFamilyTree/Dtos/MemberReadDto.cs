@@ -4,7 +4,7 @@ namespace CfpgFamilyTree.Dtos
 {
     public class MemberReadDto
     {
-        public UniqueId Id { get; set; }
+        public int Id { get; set; }
 
         public string FirstName { get; set; }
 
