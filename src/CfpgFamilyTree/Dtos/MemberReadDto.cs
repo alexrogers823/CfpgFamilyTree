@@ -1,3 +1,4 @@
+using System;
 using System.Xml;
 
 namespace CfpgFamilyTree.Dtos
@@ -22,6 +23,8 @@ namespace CfpgFamilyTree.Dtos
 
         public int BirthYear { get; set; }
 
+        public DateTime Birthdate { get; set; }
+
         public string Birthplace { get; set; }
 
         public string Residence { get; set; }
@@ -40,11 +43,15 @@ namespace CfpgFamilyTree.Dtos
         
         public string BioParagraph7 { get; set; }
 
+        public bool IsAlive { get; set; }
+
         public int DeathDay { get; set; }
 
         public int DeathMonth { get; set; }
 
         public int DeathYear { get; set; }
+
+        public DateTime DeceasedDate { get; set; }
 
         public int PrimaryParentId { get; set; }
 

@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Xml;
 
@@ -31,6 +32,8 @@ namespace CfpgFamilyTree.Models
         [Required]
         public int BirthYear { get; set; }
 
+        public DateTime Birthdate { get; set; }
+
         [Range(1, 31, ErrorMessage="Value for {0} must be between {1} and {2}")]
         public int? DeathDay { get; set; }
 
@@ -38,6 +41,8 @@ namespace CfpgFamilyTree.Models
         public int? DeathMonth { get; set; }
 
         public int? DeathYear { get; set; }
+
+        public DateTime? DeceasedDate { get; set; }
 
         public string Birthplace { get; set; }
 

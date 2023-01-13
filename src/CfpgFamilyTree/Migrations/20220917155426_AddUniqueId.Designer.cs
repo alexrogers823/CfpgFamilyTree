@@ -3,15 +3,17 @@ using System;
 using CfpgFamilyTree.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace CfpgFamilyTree.Migrations
 {
     [DbContext(typeof(CfpgContext))]
-    partial class CfpgContextModelSnapshot : ModelSnapshot
+    [Migration("20220917155426_AddUniqueId")]
+    partial class AddUniqueId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,9 +104,6 @@ namespace CfpgFamilyTree.Migrations
                     b.Property<int>("BirthYear")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("Birthdate")
-                        .HasColumnType("timestamp without time zone");
-
                     b.Property<string>("Birthplace")
                         .HasColumnType("text");
 
@@ -116,9 +115,6 @@ namespace CfpgFamilyTree.Migrations
 
                     b.Property<int?>("DeathYear")
                         .HasColumnType("integer");
-
-                    b.Property<DateTime?>("DeceasedDate")
-                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("FirstName")
                         .IsRequired()

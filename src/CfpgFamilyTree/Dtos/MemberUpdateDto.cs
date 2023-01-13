@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace CfpgFamilyTree.Dtos 
@@ -25,11 +26,15 @@ namespace CfpgFamilyTree.Dtos
         [Required]
         public int? BirthYear { get; set; }
 
+        public DateTime Birthdate { get; set; }
+
         public int? DeathDay { get; set; }
 
         public int? DeathMonth { get; set; }
 
         public int? DeathYear { get; set; }
+
+        public DateTime? DeceasedDate { get; set; }
 
         public string Birthplace { get; set; }
 
