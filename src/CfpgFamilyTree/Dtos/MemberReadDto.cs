@@ -29,19 +29,7 @@ namespace CfpgFamilyTree.Dtos
 
         public string Residence { get; set; }
 
-        public string BioParagraph1 { get; set; }
-
-        public string BioParagraph2 { get; set; }
-
-        public string BioParagraph3 { get; set; }
-
-        public string BioParagraph4 { get; set; }
-
-        public string BioParagraph5 { get; set; }
-
-        public string BioParagraph6 { get; set; }
-        
-        public string BioParagraph7 { get; set; }
+        public string Biography { get; set; }
 
         public bool IsAlive { get; set; }
 

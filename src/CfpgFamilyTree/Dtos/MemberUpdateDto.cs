@@ -40,6 +40,8 @@ namespace CfpgFamilyTree.Dtos
 
         public string Residence { get; set; }
 
+        public string Biography { get; set; }
+
         [Required]
         public bool IsAlive { get; set; }
 
