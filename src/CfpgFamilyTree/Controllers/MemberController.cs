@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using CfpgFamilyTree.Data;
 using CfpgFamilyTree.Dtos;
@@ -14,15 +15,17 @@ namespace CfpgFamilyTree.Controllers
     {
         private readonly IMemberRepo _repository;
         private readonly IMapper _mapper;
+        private readonly CfpgContext _dbContext;
 
-        public MemberController(IMemberRepo repository, IMapper mapper)
+        public MemberController(IMemberRepo repository, IMapper mapper, CfpgContext dbContext)
         {
             _repository = repository; 
             _mapper = mapper;
+            _dbContext = dbContext;
         }
 
         [HttpGet]
-        public ActionResult <IEnumerable<MemberReadDto>> GetAllFamilyMembers()
+        public ActionResult GetAllFamilyMembers()
         {
             var members = _repository.GetAllFamilyMembers();
 
@@ -35,7 +38,53 @@ namespace CfpgFamilyTree.Controllers
             var member = _repository.GetFamilyMemberById(id);
             if (member != null)
             {
-                return Ok(_mapper.Map<MemberReadDto>(member));
+                // return Ok(_mapper.Map<MemberReadDto>(member));
+                var query = from mem in _dbContext.Members
+                         join par in _dbContext.Members
+                         on mem.PrimaryParentId equals par.Id 
+                         into memberPlusParent
+                         from familyLine in memberPlusParent.DefaultIfEmpty()
+                         select new { 
+                            Id = mem.Id,
+                            FirstName = mem.FirstName,
+                            MiddleName = mem.MiddleName,
+                            LastName = mem.LastName,
+                            PreferredName = mem.PreferredName,
+                            Suffix = mem.Suffix,
+                            ProfilePhotoUrl = mem.ProfilePhotoUrl, //not currently in read dto
+                            BirthDay = mem.BirthDay,
+                            BirthMonth = mem.BirthMonth,
+                            BirthYear = mem.BirthYear,
+                            Birthdate = mem.Birthdate,
+                            Residence = mem.Residence,
+                            Biography = mem.Biography,
+                            IsAlive = mem.IsAlive,
+                            DeathDay = mem.DeathDay,
+                            DeathMonth = mem.DeathMonth,
+                            DeathYear = mem.DeathYear,
+                            DeceasedDate = mem.DeceasedDate,
+                            PrimaryParentId = mem.PrimaryParentId,
+                            PrimaryParentName = familyLine.PreferredName != null ? familyLine.PreferredName : familyLine.FirstName,
+                            SecondaryParentId = mem.SecondaryParentId,
+                            SpouseId = mem.SpouseId
+                         };
+                        //  where mem.Id equals id;
+
+                return Ok(query.FirstOrDefault(m => m.Id.Equals(id)));
+
+                // var result = _dbContext.Members.GroupJoin(
+                //     _dbContext.Members,
+                //     mem => mem.PrimaryParentId,
+                //     par => par.Id,
+                //     (member, parent ) => new { member, parent }
+                // )
+                // .SelectMany(
+                //     x => x.parent.DefaultIfEmpty(),
+                //     (fammember, famparent) => new { fammember, famparent }
+                // );
+                // .FirstOrDefault(m => m.member.Id.Equals(id));
+
+                // return Ok(result);
             }
             return NotFound();
         }

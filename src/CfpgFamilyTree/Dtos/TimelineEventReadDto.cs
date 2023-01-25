@@ -12,6 +12,8 @@ namespace CfpgFamilyTree.Dtos
 
         public int Year { get; set; }
 
+        public DateTime EventDate { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public int CreatedByUserId { get; set; }

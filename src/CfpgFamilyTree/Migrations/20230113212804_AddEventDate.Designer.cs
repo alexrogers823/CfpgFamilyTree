@@ -3,15 +3,17 @@ using System;
 using CfpgFamilyTree.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace CfpgFamilyTree.Migrations
 {
     [DbContext(typeof(CfpgContext))]
-    partial class CfpgContextModelSnapshot : ModelSnapshot
+    [Migration("20230113212804_AddEventDate")]
+    partial class AddEventDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -141,9 +143,6 @@ namespace CfpgFamilyTree.Migrations
 
                     b.Property<string>("Suffix")
                         .HasColumnType("text");
-
-                    b.Property<Guid>("UniqueId")
-                        .HasColumnType("uuid");
 
                     b.Property<int?>("UserId")
                         .HasColumnType("integer");

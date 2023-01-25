@@ -12,8 +12,9 @@ namespace CfpgFamilyTree.Models
 
         public int? Month { get; set; }
 
-        [Required]
         public int Year { get; set; }
+
+        public DateTime EventDate { get; set; }
 
         public DateTime CreatedOn { get; set; }
 

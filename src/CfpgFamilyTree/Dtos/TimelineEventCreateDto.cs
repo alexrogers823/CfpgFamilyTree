@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace CfpgFamilyTree.Dtos
@@ -8,8 +9,9 @@ namespace CfpgFamilyTree.Dtos
 
         public int? Month { get; set; }
 
-        [Required]
         public int Year { get; set; }
+
+        public DateTime EventDate { get; set; }
 
         [Required]
         public string Event { get; set; }
