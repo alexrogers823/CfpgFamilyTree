@@ -40,10 +40,15 @@ namespace CfpgFamilyTree.Controllers
             {
                 // return Ok(_mapper.Map<MemberReadDto>(member));
                 var query = from mem in _dbContext.Members
-                         join par in _dbContext.Members
-                         on mem.PrimaryParentId equals par.Id 
-                         into memberPlusParent
-                         from familyLine in memberPlusParent.DefaultIfEmpty()
+                         join par in _dbContext.Members on mem.PrimaryParentId equals par.Id
+                         into primaryParentTable
+                         from primaryParent in primaryParentTable.DefaultIfEmpty()
+                         join sec in _dbContext.Members on mem.SecondaryParentId equals sec.Id
+                         into secondaryParentTable 
+                         from secondaryParent in secondaryParentTable.DefaultIfEmpty() 
+                         join spo in _dbContext.Members on mem.SpouseId equals spo.Id
+                         into spouseTable 
+                         from spouse in spouseTable.DefaultIfEmpty()   
                          select new { 
                             Id = mem.Id,
                             FirstName = mem.FirstName,
@@ -64,11 +69,12 @@ namespace CfpgFamilyTree.Controllers
                             DeathYear = mem.DeathYear,
                             DeceasedDate = mem.DeceasedDate,
                             PrimaryParentId = mem.PrimaryParentId,
-                            PrimaryParentName = familyLine.PreferredName != null ? familyLine.PreferredName : familyLine.FirstName,
+                            PrimaryParentName = primaryParent.PreferredName != null ? primaryParent.PreferredName : primaryParent.FirstName,
                             SecondaryParentId = mem.SecondaryParentId,
-                            SpouseId = mem.SpouseId
+                            SecondaryParentName = secondaryParent.PreferredName != null ? secondaryParent.PreferredName : secondaryParent.FirstName,
+                            SpouseId = mem.SpouseId,
+                            SpouseName = spouse.PreferredName != null ? spouse.PreferredName : spouse.FirstName
                          };
-                        //  where mem.Id equals id;
 
                 return Ok(query.FirstOrDefault(m => m.Id.Equals(id)));
 
