@@ -115,6 +115,9 @@ namespace CfpgFamilyTree.Migrations
                     b.Property<bool>("IsAlive")
                         .HasColumnType("boolean");
 
+                    b.Property<bool>("IsInlaw")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("LastName")
                         .HasColumnType("text");
 
@@ -141,9 +144,6 @@ namespace CfpgFamilyTree.Migrations
 
                     b.Property<string>("Suffix")
                         .HasColumnType("text");
-
-                    b.Property<Guid>("UniqueId")
-                        .HasColumnType("uuid");
 
                     b.Property<int?>("UserId")
                         .HasColumnType("integer");

@@ -24,8 +24,15 @@ namespace CfpgFamilyTree.Controllers
             _dbContext = dbContext;
         }
 
+        [HttpGet("tree", Name="GetFamilyTree")]
+        public ActionResult GetFamilyTree()
+        {
+            var tree = _dbContext.Members.Where(member => member.PrimaryParentId == null);
+            return Ok(tree);
+        }
+
         [HttpGet]
-        public ActionResult GetAllFamilyMembers()
+        public ActionResult <IEnumerable<MemberReadDto>> GetAllFamilyMembers()
         {
             var members = _repository.GetAllFamilyMembers();
 
@@ -33,7 +40,7 @@ namespace CfpgFamilyTree.Controllers
         }
 
         [HttpGet("{id}", Name="GetFamilyMemberById")]
-        public ActionResult <MemberReadDto> GetFamilyMemberById(int id)
+        public ActionResult GetFamilyMemberById(int id)
         {
             var member = _repository.GetFamilyMemberById(id);
             if (member != null)
@@ -61,6 +68,7 @@ namespace CfpgFamilyTree.Controllers
                             BirthMonth = mem.BirthMonth,
                             BirthYear = mem.BirthYear,
                             Birthdate = mem.Birthdate,
+                            Birthplace = mem.Birthplace,
                             Residence = mem.Residence,
                             Biography = mem.Biography,
                             IsAlive = mem.IsAlive,

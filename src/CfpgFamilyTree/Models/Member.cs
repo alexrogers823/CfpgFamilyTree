@@ -55,6 +55,8 @@ namespace CfpgFamilyTree.Models
 
         public bool HasSpouse { get; set; }
 
+        public bool IsInlaw { get; set; }
+
         public int? PrimaryParentId { get; set; }
 
         public int? SecondaryParentId { get; set; }
