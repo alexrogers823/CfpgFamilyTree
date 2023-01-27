@@ -16,19 +16,22 @@ namespace CfpgFamilyTree.Controllers
         private readonly IMemberRepo _repository;
         private readonly IMapper _mapper;
         private readonly CfpgContext _dbContext;
+        private readonly IDynamicTree _tree;
 
-        public MemberController(IMemberRepo repository, IMapper mapper, CfpgContext dbContext)
+        public MemberController(IMemberRepo repository, IMapper mapper, CfpgContext dbContext, IDynamicTree tree)
         {
             _repository = repository; 
             _mapper = mapper;
             _dbContext = dbContext;
+            _tree = tree;
         }
 
         [HttpGet("tree", Name="GetFamilyTree")]
         public ActionResult GetFamilyTree()
         {
-            var tree = _dbContext.Members.Where(member => member.PrimaryParentId == null);
-            return Ok(tree);
+            // Member treeRoot = _dbContext.Members.SingleOrDefault(member => member.PrimaryParentId == null && member.IsInlaw == false);
+            var treeRoot = _tree.GetFamilyTree();
+            return Ok(treeRoot);
         }
 
         [HttpGet]
@@ -72,6 +75,7 @@ namespace CfpgFamilyTree.Controllers
                             Residence = mem.Residence,
                             Biography = mem.Biography,
                             IsAlive = mem.IsAlive,
+                            IsInlaw = mem.IsInlaw,
                             DeathDay = mem.DeathDay,
                             DeathMonth = mem.DeathMonth,
                             DeathYear = mem.DeathYear,
