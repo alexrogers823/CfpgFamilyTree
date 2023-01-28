@@ -1,5 +1,6 @@
 using System.Linq;
 using CfpgFamilyTree.DataStructures;
+using CfpgFamilyTree.Models;
 
 namespace CfpgFamilyTree.Data
 {
@@ -12,19 +13,26 @@ namespace CfpgFamilyTree.Data
             _context = context;
         }
 
-        public TreeNode GetFamilyTree()
+        public TreeNode GetFamilyTree(Member rootMember)
         {
-            var sample = _context.Members.FirstOrDefault(p => p.Id == 3);
+            return CreateTreeNode(rootMember);
+        }
 
-            return new TreeNode {
-                Id = sample.Id,
-                PreferredName = sample.FirstName,
-                LastName = sample.LastName,
-                IsInlaw = sample.IsInlaw,
-                SpouseId = sample.SpouseId,
-                Children = null
+        public TreeNode CreateTreeNode(Member member)
+        {
+            var children = _context.Members.Where(c => c.PrimaryParentId == member.Id);
+            // var children = _context.Members.FirstOrDefault(p => p.FirstName == "Josh"); //Defaults to null
+            // TreeNode[] childrenSet = children.Select(child => CreateTreeNode(child)).ToArray();
+
+            return new TreeNode 
+            {
+                Id = member.Id,
+                PreferredName = member.FirstName,
+                LastName = member.LastName,
+                IsInlaw = member.IsInlaw,
+                SpouseId = member.SpouseId,
+                Children = (children.Count() < 1) ? null : children.ToList().Select(child => CreateTreeNode(child)).ToArray()
             };
         }
     }
-
 }

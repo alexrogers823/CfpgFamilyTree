@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using CfpgFamilyTree.Data;
+using CfpgFamilyTree.DataStructures;
 using CfpgFamilyTree.Dtos;
 using CfpgFamilyTree.Models;
 using Microsoft.AspNetCore.JsonPatch;
@@ -29,9 +30,10 @@ namespace CfpgFamilyTree.Controllers
         [HttpGet("tree", Name="GetFamilyTree")]
         public ActionResult GetFamilyTree()
         {
-            // Member treeRoot = _dbContext.Members.SingleOrDefault(member => member.PrimaryParentId == null && member.IsInlaw == false);
-            var treeRoot = _tree.GetFamilyTree();
-            return Ok(treeRoot);
+            Member treeRoot = _dbContext.Members.SingleOrDefault(member => member.PrimaryParentId == null && member.IsInlaw == false);
+            TreeNode tree = _tree.GetFamilyTree(treeRoot);
+            
+            return Ok(tree);
         }
 
         [HttpGet]
