@@ -38,6 +38,12 @@ namespace CfpgFamilyTree
             builder.Username = Configuration["UserID"];
             builder.Password = Configuration["Password"];
 
+            services.AddCors(options => {
+                options.AddDefaultPolicy(b => {
+                    b.WithOrigins("*");
+                });
+            });
+
             services.AddDbContext<CfpgContext>(opt => opt.UseNpgsql(builder.ConnectionString));
 
             services.AddControllers().AddNewtonsoftJson(s => {
@@ -73,6 +79,8 @@ namespace CfpgFamilyTree
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthorization();
 

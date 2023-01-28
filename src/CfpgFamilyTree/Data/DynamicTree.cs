@@ -20,18 +20,16 @@ namespace CfpgFamilyTree.Data
 
         public TreeNode CreateTreeNode(Member member)
         {
-            var children = _context.Members.Where(c => c.PrimaryParentId == member.Id);
-            // var children = _context.Members.FirstOrDefault(p => p.FirstName == "Josh"); //Defaults to null
-            // TreeNode[] childrenSet = children.Select(child => CreateTreeNode(child)).ToArray();
+            var children = _context.Members.Where(c => c.PrimaryParentId == member.Id).OrderBy(m => m.Birthdate);
 
             return new TreeNode 
             {
                 Id = member.Id,
-                PreferredName = member.FirstName,
+                PreferredName = (member.PreferredName != null) ? member.PreferredName : member.FirstName,
                 LastName = member.LastName,
                 IsInlaw = member.IsInlaw,
                 SpouseId = member.SpouseId,
-                Children = (children.Count() < 1) ? null : children.ToList().Select(child => CreateTreeNode(child)).ToArray()
+                Children = (children.Count() == 0) ? null : children.ToList().Select(child => CreateTreeNode(child)).ToArray()
             };
         }
     }
