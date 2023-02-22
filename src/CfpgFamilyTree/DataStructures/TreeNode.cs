@@ -6,7 +6,7 @@ namespace CfpgFamilyTree.DataStructures
         public string PreferredName { get; set; }
         public string LastName { get; set; }
         public bool IsInlaw { get; set; }
-        public int? SpouseId { get; set; }
+        public TreeNode Spouse { get; set; }
         public TreeNode[] Children { get; set; }
     }
 }
