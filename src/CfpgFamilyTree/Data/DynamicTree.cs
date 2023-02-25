@@ -28,8 +28,10 @@ namespace CfpgFamilyTree.Data
                 Id = member.Id,
                 PreferredName = (member.PreferredName != null) ? member.PreferredName : member.FirstName,
                 LastName = member.LastName,
+                BirthYear = member.Birthdate.Year,
+                DeathYear = member.DeceasedDate?.Year,
                 IsInlaw = member.IsInlaw,
-                Spouse = spouse != null ? new TreeNode { Id = spouse.Id, PreferredName = (spouse.PreferredName != null) ? spouse.PreferredName : spouse.FirstName, LastName = spouse.LastName, IsInlaw = true} : null,
+                Spouse = spouse != null ? new TreeNode { Id = spouse.Id, PreferredName = (spouse.PreferredName != null) ? spouse.PreferredName : spouse.FirstName, LastName = spouse.LastName, BirthYear = spouse.Birthdate.Year, DeathYear = spouse.DeceasedDate?.Year, IsInlaw = true} : null,
                 Children = (children.Count() == 0) ? null : children.ToList().Select(child => CreateTreeNode(child)).ToArray()
             };
         }

@@ -5,6 +5,8 @@ namespace CfpgFamilyTree.DataStructures
         public int Id { get; set; }
         public string PreferredName { get; set; }
         public string LastName { get; set; }
+        public int? BirthYear { get; set; }
+        public int? DeathYear { get; set; }
         public bool IsInlaw { get; set; }
         public TreeNode Spouse { get; set; }
         public TreeNode[] Children { get; set; }
