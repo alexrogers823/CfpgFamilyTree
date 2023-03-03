@@ -53,9 +53,9 @@ namespace CfpgFamilyTree.Controllers
         }
 
         [HttpPost("login", Name="LoginUser")]
-        public ActionResult <UserReadDto> LoginUser(string email, string inputPassword)
+        public ActionResult <UserReadDto> LoginUser(UserLoginDto userLoginDto)
         {
-            var user = _repository.LoginUser(email, inputPassword);
+            var user = _repository.LoginUser(userLoginDto.Email, userLoginDto.InputPassword);
             _repository.UpdateUser(user); // Last logged in
             _repository.SaveChanges();
 
