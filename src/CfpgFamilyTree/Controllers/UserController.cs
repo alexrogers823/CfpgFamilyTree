@@ -52,6 +52,16 @@ namespace CfpgFamilyTree.Controllers
             return CreatedAtRoute(nameof(GetUserById), new {Id = userReadDto.Id}, userReadDto);
         }
 
+        [HttpPost("login", Name="LoginUser")]
+        public ActionResult <UserReadDto> LoginUser(string email, string inputPassword)
+        {
+            var user = _repository.LoginUser(email, inputPassword);
+            _repository.UpdateUser(user); // Last logged in
+            _repository.SaveChanges();
+
+            return Ok(_mapper.Map<UserReadDto>(user));
+        }
+
         [HttpPut("{id}")]
         public ActionResult UpdateUser(int id, UserUpdateDto userUpdateDto)
         {

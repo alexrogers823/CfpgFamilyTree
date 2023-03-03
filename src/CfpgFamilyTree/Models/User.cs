@@ -15,6 +15,7 @@ namespace CfpgFamilyTree.Models
 
         [Required]
         public string LastName { get; set; }
+        public string PreferredName { get; set; }
 
         [Required]
         public string Email { get; set; }

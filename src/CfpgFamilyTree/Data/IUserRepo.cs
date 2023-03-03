@@ -8,7 +8,7 @@ namespace CfpgFamilyTree.Data
         bool SaveChanges();
         IEnumerable<User> GetAllUsers();
         User GetUserById(int id);
-        User LoginUser(User user);
+        User LoginUser(string email, string inputPassword);
         void CreateUser(User user);
         void UpdateUser(User user);
         void DeleteUser(User user);

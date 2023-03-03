@@ -40,7 +40,9 @@ namespace CfpgFamilyTree
 
             services.AddCors(options => {
                 options.AddDefaultPolicy(b => {
-                    b.WithOrigins("*");
+                    b.WithOrigins("*")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
                 });
             });
 

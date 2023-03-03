@@ -26,6 +26,9 @@ namespace CfpgFamilyTree.Data
             }
 
             user.Password = _hashPassword(user.Password); // This might work
+            user.CreatedOn = DateTime.Now;
+            user.LastLoggedIn = DateTime.Now;
+
             _context.Users.Add(user);
         }
 
@@ -49,15 +52,18 @@ namespace CfpgFamilyTree.Data
             return _context.Users.FirstOrDefault(p => p.Id == id);
         }
 
-        public User LoginUser(User user)
+        public User LoginUser(string email, string inputPassword)
         {
+            var user = _context.Users.FirstOrDefault(u => u.Email == email);
+
             if(user == null)
             {
                 throw new ArgumentNullException(nameof(user));
             }
 
-            if(_authenticateUser(user))
+            if(_authenticateUser(user, inputPassword))
             {
+                user.LastLoggedIn = DateTime.Now;
                 return user;
             } else {
                 throw new MemberAccessException(nameof(user));
@@ -71,7 +77,7 @@ namespace CfpgFamilyTree.Data
 
         public void UpdateUser(User user)
         {
-        
+
         }
 
         private string _hashPassword(string password)
@@ -89,9 +95,8 @@ namespace CfpgFamilyTree.Data
             return hashed;
         }
 
-        private bool _authenticateUser(User user)
+        private bool _authenticateUser(User user, string inputPassword)
         {
-            string inputPassword = user.Password;
             new RNGCryptoServiceProvider().GetBytes(salt);
 
             string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
@@ -102,9 +107,7 @@ namespace CfpgFamilyTree.Data
                 numBytesRequested: 256 / 8
             ));
 
-            User dbUser = _context.Users.FirstOrDefault(p => p.Email == user.Email);
-
-            return hashed == dbUser.Password;
+            return hashed == user.Password;
         }
 
     } 
