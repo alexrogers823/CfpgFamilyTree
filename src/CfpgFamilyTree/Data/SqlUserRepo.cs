@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
+using CfpgFamilyTree.DataStructures;
 using CfpgFamilyTree.Models;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
@@ -65,9 +66,29 @@ namespace CfpgFamilyTree.Data
             {
                 user.LastLoggedIn = DateTime.Now;
                 return user;
+                
             } else {
                 throw new MemberAccessException(nameof(user));
             }
+        }
+
+        public UserJoinedInformation CombineMemberInformation(User user)
+        {
+            var member = _context.Members.FirstOrDefault(m => m.UserId == user.Id);
+
+            return new UserJoinedInformation
+            {
+                Id = user.Id,
+                FirstName = member.FirstName,
+                MiddleName = member.MiddleName,
+                LastName = member.LastName,
+                PreferredName = member.PreferredName,
+                Email = user.Email,
+                Birthplace = member.Birthplace,
+                Residence = member.Residence,
+                CreatedOn = user.CreatedOn,
+                LastLoggedIn = user.LastLoggedIn
+            };
         }
 
         public bool SaveChanges()
@@ -105,6 +126,19 @@ namespace CfpgFamilyTree.Data
             string decrypted = new String(decoded_char);
 
             return decrypted == inputPassword;
+        }
+
+        private bool _matchUserToProfile(User user)
+        {
+            var profile = _context.Members.FirstOrDefault(m => m.UserId == user.Id);
+
+            if (profile != null)
+            {
+                return true;
+            }
+
+            return false;
+            
         }
     } 
 }

@@ -50,47 +50,41 @@ namespace CfpgFamilyTree.Controllers
             var member = _repository.GetFamilyMemberById(id);
             if (member != null)
             {
-                // return Ok(_mapper.Map<MemberReadDto>(member));
-                var query = from mem in _dbContext.Members
-                         join par in _dbContext.Members on mem.PrimaryParentId equals par.Id
-                         into primaryParentTable
-                         from primaryParent in primaryParentTable.DefaultIfEmpty()
-                         join sec in _dbContext.Members on mem.SecondaryParentId equals sec.Id
-                         into secondaryParentTable 
-                         from secondaryParent in secondaryParentTable.DefaultIfEmpty() 
-                         join spo in _dbContext.Members on mem.SpouseId equals spo.Id
-                         into spouseTable 
-                         from spouse in spouseTable.DefaultIfEmpty()   
-                         select new { 
-                            Id = mem.Id,
-                            FirstName = mem.FirstName,
-                            MiddleName = mem.MiddleName,
-                            LastName = mem.LastName,
-                            PreferredName = mem.PreferredName,
-                            Suffix = mem.Suffix,
-                            ProfilePhotoUrl = mem.ProfilePhotoUrl, //not currently in read dto
-                            BirthDay = mem.BirthDay,
-                            BirthMonth = mem.BirthMonth,
-                            BirthYear = mem.BirthYear,
-                            Birthdate = mem.Birthdate,
-                            Birthplace = mem.Birthplace,
-                            Residence = mem.Residence,
-                            Biography = mem.Biography,
-                            IsAlive = mem.IsAlive,
-                            IsInlaw = mem.IsInlaw,
-                            DeathDay = mem.DeathDay,
-                            DeathMonth = mem.DeathMonth,
-                            DeathYear = mem.DeathYear,
-                            DeceasedDate = mem.DeceasedDate,
-                            PrimaryParentId = mem.PrimaryParentId,
-                            PrimaryParentName = primaryParent.PreferredName != null ? primaryParent.PreferredName : primaryParent.FirstName,
-                            SecondaryParentId = mem.SecondaryParentId,
-                            SecondaryParentName = secondaryParent.PreferredName != null ? secondaryParent.PreferredName : secondaryParent.FirstName,
-                            SpouseId = mem.SpouseId,
-                            SpouseName = spouse.PreferredName != null ? spouse.PreferredName : spouse.FirstName
-                         };
+                return Ok(_mapper.Map<MemberReadDto>(member));
+                // var query = from mem in _dbContext.Members
+                //          join par in _dbContext.Members on mem.PrimaryParentId equals par.Id
+                //          into primaryParentTable
+                //          from primaryParent in primaryParentTable.DefaultIfEmpty()
+                //          join sec in _dbContext.Members on mem.SecondaryParentId equals sec.Id
+                //          into secondaryParentTable 
+                //          from secondaryParent in secondaryParentTable.DefaultIfEmpty() 
+                //          join spo in _dbContext.Members on mem.SpouseId equals spo.Id
+                //          into spouseTable 
+                //          from spouse in spouseTable.DefaultIfEmpty()   
+                //          select new { 
+                //             Id = mem.Id,
+                //             FirstName = mem.FirstName,
+                //             MiddleName = mem.MiddleName,
+                //             LastName = mem.LastName,
+                //             PreferredName = mem.PreferredName,
+                //             Suffix = mem.Suffix,
+                //             ProfilePhotoUrl = mem.ProfilePhotoUrl, //not currently in read dto
+                //             Birthdate = mem.Birthdate,
+                //             Birthplace = mem.Birthplace,
+                //             Residence = mem.Residence,
+                //             Biography = mem.Biography,
+                //             IsAlive = mem.IsAlive,
+                //             IsInlaw = mem.IsInlaw,
+                //             DeceasedDate = mem.DeceasedDate,
+                //             PrimaryParentId = mem.PrimaryParentId,
+                //             PrimaryParentName = primaryParent.PreferredName != null ? primaryParent.PreferredName : primaryParent.FirstName,
+                //             SecondaryParentId = mem.SecondaryParentId,
+                //             SecondaryParentName = secondaryParent.PreferredName != null ? secondaryParent.PreferredName : secondaryParent.FirstName,
+                //             SpouseId = mem.SpouseId,
+                //             SpouseName = spouse.PreferredName != null ? spouse.PreferredName : spouse.FirstName
+                //          };
 
-                return Ok(query.FirstOrDefault(m => m.Id.Equals(id)));
+                // return Ok(query.FirstOrDefault(m => m.Id.Equals(id)));
 
                 // var result = _dbContext.Members.GroupJoin(
                 //     _dbContext.Members,

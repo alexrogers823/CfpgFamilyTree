@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using CfpgFamilyTree.DataStructures;
 using CfpgFamilyTree.Models;
 
 namespace CfpgFamilyTree.Data 
@@ -9,6 +10,7 @@ namespace CfpgFamilyTree.Data
         IEnumerable<User> GetAllUsers();
         User GetUserById(int id);
         User LoginUser(string email, string inputPassword);
+        UserJoinedInformation CombineMemberInformation(User user);
         void CreateUser(User user);
         void UpdateUser(User user);
         void DeleteUser(User user);

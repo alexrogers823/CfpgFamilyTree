@@ -1,8 +1,8 @@
 using System;
 
-namespace CfpgFamilyTree.Dtos
+namespace CfpgFamilyTree.DataStructures
 {
-    public class UserReadDto
+    public class UserJoinedInformation
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -13,7 +13,6 @@ namespace CfpgFamilyTree.Dtos
         public string Birthplace { get; set; }
         public string Residence { get; set; }
         public DateTime CreatedOn { get; set; }
-
         public DateTime LastLoggedIn { get; set; }
     }
 }
